@@ -1,0 +1,10 @@
+.SideNav__head {
+  letter-spacing: 2.4px;
+  font-size: var(--font-12);
+  padding-left: var(--margin-large);
+  margin-bottom: var(--margin-small);
+
+  /*@include mobile {
+    padding-left: 0;
+  }*/
+}

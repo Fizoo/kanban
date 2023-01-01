@@ -1,0 +1,52 @@
+
+.Board {
+ // position: absolute;
+ // left: 18.75rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+  transition: left .2s ease;
+  padding: var(--margin-medium) var(--margin-large);
+  cursor: move;
+
+}
+
+.modal{
+  .modal-dialog{
+    .modal-content{
+
+      background: var(--darkGray);
+      color: var(--color-text);
+      .modal-header{
+        border-bottom: none;
+
+
+      }
+      .modal-body{
+        padding-top:  0;
+        .form-check{
+
+          background: var(--bg-main);
+        }
+      }
+
+
+
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

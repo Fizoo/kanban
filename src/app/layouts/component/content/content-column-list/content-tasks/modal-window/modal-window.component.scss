@@ -1,0 +1,24 @@
+.modal{
+  .modal-dialog{
+    .modal-content{
+
+      background: var(--darkGray);
+      color: var(--color-text);
+      .modal-header{
+        border-bottom: none;
+
+
+      }
+      .modal-body{
+        padding-top:  0;
+        .form-check{
+
+          background: var(--bg-main);
+        }
+      }
+
+
+
+    }
+  }
+}

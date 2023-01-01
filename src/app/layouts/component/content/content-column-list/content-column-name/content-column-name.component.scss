@@ -1,0 +1,50 @@
+:host{
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--margin-medium);
+  font-size: var(--font-12);
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--mediumGray);
+
+}
+
+.Column__title-ball {
+  display: flex;
+  min-width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin-right: 12px;
+
+  &--0 {
+    background: #49C4E5;
+  }
+
+  &--1 {
+    background: #8471F2;
+  }
+
+  &--2 {
+    background: #67E2AE;
+  }
+
+  &--3 {
+    background: #e5a449;
+  }
+
+  &--4 {
+    background: #2a3fdb;
+  }
+
+  &--5 {
+    background: #c36e6e;
+  }
+}
+
+.Column__title-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: help;
+}

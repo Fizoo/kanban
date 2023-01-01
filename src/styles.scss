@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap');
+
+
+:root {
+  //space
+  --margin-tiny: .5rem;
+  --margin-small: 1rem;
+  --margin-medium: 1.5rem;
+  --margin-large: 2rem;
+
+  //opacity
+  --hover: .6;
+
+  //font
+  --font-12: 0.75rem;
+  --font-13: 0.8125rem;
+  --font-15: 0.9375rem;
+  --font-18: 1.125rem;
+  --font-19: 1.1875rem;
+  --font-23: 1.4375rem;
+  --font-24: clamp(1.2rem, 3vw, 1.5rem);
+  --font-30: 1.875rem;
+
+  //color
+  --black: #000000;
+  --white: #ffffff;
+  --red: #EA5555;
+  --darkBlue: #635FC7;
+  --veryLightBlue: #f0effa;
+  --lightBlue: #A8A4FF;
+  --lightGray: #F4F7FD;
+  --lightGrayLine: #E4EBFA;
+  --mediumGray: #828fa3;
+  --darkGray: #2B2C37;
+  --darkGrayLine: #3E3F4E;
+  --veryDarkGray: #20212C;
+  --cardShadow: rgba(54, 78, 126, 0.101545);
+  --overlay: rgba(0, 0, 0, 0.5);
+  --mediumGrayOpacity: rgba(130, 143, 163, 0.4);
+  --mediumGrayGradient: linear-gradient(to bottom, rgba(121, 132, 147, 0.2), rgba(130, 143, 163, 0.1), rgba(130, 143, 163, 0));
+  --darkBlueOpacity: rgba(99, 95, 199, 0.25);
+
+  --bg-main: #20212C;
+  --color-text: var(--white);
+
+}
+
+.light-theme {
+  --bg-main: #F4F7FD;
+  --color-text: var(--black);
+  --darkGray: var(--white);
+  --darkGrayLine: var(--lightGrayLine);
+}
+
+.dark-theme {
+  // --bg-main: #20212C;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: 0;
+  border: 0;
+  appearance: none;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+
+}
+
+body {
+  background: var(--bg-main) !important;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: Plus Jakarta Sans, sans-serif;
+  overflow: hidden;
+
+}
+
+
+h1 {
+  font-size: var(--font-24);
+}
+
+h2 {
+  font-size: var(--font-18);
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

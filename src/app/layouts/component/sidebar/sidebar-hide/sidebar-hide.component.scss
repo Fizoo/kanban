@@ -1,0 +1,18 @@
+.SideNav__hideButton {
+  font-size: var(--font-15);
+  color: var(--mediumGray);
+  background: inherit;
+  display: flex;
+  align-items: center;
+  margin-left: var(--margin-large);
+  margin-top: var(--margin-small) ;
+  transition: opacity .1s ease-out;
+
+  &:hover {
+    opacity: var(--hover);
+  }
+  /*
+    @include mobile {
+      display: none;
+    }*/
+}

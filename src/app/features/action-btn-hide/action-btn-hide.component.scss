@@ -1,0 +1,10 @@
+.btnHide{
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 1rem;
+  button{
+    background: gray;
+    color: var(--color-text);
+  }
+}

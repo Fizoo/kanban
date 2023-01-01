@@ -1,0 +1,58 @@
+.Launch__buttons {
+  display: flex;
+  align-items: center;
+
+  .Launch__mobile-sideNav {
+    z-index: 9;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    animation: fadeIn .3s ease-in;
+    background: var(--overlay);
+    overflow-x: hidden;
+  }
+
+  .Launch__mobile-btn {
+    display: flex;
+    justify-content: space-between;
+    min-width: fit-content;
+    font-weight: bold;
+    font-size: var(--font-24);
+    color: var(--title);
+  }
+
+  .Launch__mobile-btn-icon {
+    width: .5rem;
+    margin-left: var(--margin-tiny);
+    transition: all .2s ease;
+  }
+
+  .Launch__mobile-btn-title {
+    display: flex;
+    max-width: 10rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: left;
+  }
+}
+
+.Button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  background: var(--darkBlue);
+  padding: .75rem var(--margin-small);
+  border-radius: 24px;
+  color: var(--white);
+  font-size: var(--font-15);
+  font-weight: bold;
+  transition: all .2s ease;
+
+  &:hover:not(&--theme, &--custom){
+    background: var(--lightBlue);
+  }
+}

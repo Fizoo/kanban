@@ -1,0 +1,20 @@
+:host{
+  display: block;
+}
+
+.Card__title {
+  font-size: var(--font-15);
+  font-weight: bold;
+  color: var(--color-text);
+  margin-bottom: var(--margin-tiny);
+
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.Card__count {
+  font-size: var(--font-12);
+  font-weight: bold;
+  color: var(--mediumGray);
+}
