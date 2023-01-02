@@ -1,8 +1,8 @@
 
   <div class="SideNav__top">
-    <app-sidebar-head [menu]="listButton"></app-sidebar-head>
+    <app-sidebar-head [count]= "btnCount$ | async  "></app-sidebar-head>
 
-    <app-sidebar-action [listMenu]="listButton" (activeMenu)="activeButton($event)"></app-sidebar-action>
+    <app-sidebar-action [listMenu]="listButton$ | async " ></app-sidebar-action>
 
     <app-sidebar-create-new (createNew)="addButton()"></app-sidebar-create-new>
   </div>

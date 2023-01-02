@@ -1,5 +1,6 @@
 import {createAction, props} from "@ngrx/store";
 import {Boards, Subtask, Tasks} from "../../assets/data/model";
+import {Btn} from "./reducerBtn";
 
 export enum KanbanNames{
   GetAll='[Kanban] Get All',
@@ -11,6 +12,12 @@ export enum KanbanNames{
 
   GetUI='[UI] getUI',
   ChangeDarkMode='[UI] changeDarkMode',
+
+  GetBtn='[Btn] get',
+  AddBtn='[Btn] add',
+  DeleteBtn='[Btn] delete',
+  ActiveBtn='[Btn] active',
+  GetActiveName='[Btn] getActiveName'
 }
 
 export namespace KanbanActions{
@@ -26,4 +33,14 @@ export namespace KanbanActions{
   export const saveLocalStorage=createAction(KanbanNames.SaveLocalStorage,props<{list:Boards}>())
 
   export const getWithLocalStorage=createAction(KanbanNames.GetWithLocalStorage,props<{list:Boards}>())
+
+
+}
+
+export namespace BtnActions{
+  export const getAll=createAction(KanbanNames.GetBtn);
+
+  export const addBtn=createAction(KanbanNames.AddBtn,props<{item:Btn}>())
+
+  export const activeBtn=createAction(KanbanNames.ActiveBtn,props<{item:Btn}>())
 }

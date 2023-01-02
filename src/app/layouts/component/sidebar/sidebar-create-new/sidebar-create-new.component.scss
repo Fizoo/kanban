@@ -1,8 +1,8 @@
-.SideNav__tab {
+.addNewBtn {
   display: flex;
   align-items: center;
   text-align: left;
-
+  color:var(--darkBlue);
   padding-left: var(--margin-large);
   padding-bottom: var(--margin-tiny );
   padding-top: var(--margin-tiny );
@@ -13,15 +13,12 @@
   margin-bottom:.2rem;
   position: relative;
   background: transparent;
-  transition: color .2s ease;
-  color: inherit;
-  z-index:0;
+  transition: all .2s ease;
 
   & > svg {
     margin-right:var(--margin-small);
     min-width: 1rem;
   }
-
   &::after {
     transition: background-color .1s ease;
     content: '';
@@ -34,22 +31,8 @@
     height: 100%;
     border-radius: 0 25px 25px 0;
   }
-
-  &:hover:not(&--addNew, &--active) {
-    color: var(--white);
-    &::after {
-      content: '';
-      background-color: var(--lightBlue);
-    }
-  }
-
-  &--addNew {
-    color:var(--darkBlue);
-    transition: opacity .1s ease-out;
-
-    &:hover{
-      opacity: var(--hover);
-    }
+  &:hover{
+    opacity: var(--hover);
   }
 
 }

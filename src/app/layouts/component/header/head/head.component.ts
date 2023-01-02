@@ -8,6 +8,6 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 })
 export class HeadComponent {
 @Input()
-  title:string
+  title:string|null
 
 }

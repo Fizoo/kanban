@@ -3,7 +3,7 @@
     <app-logo [isDark]="isDark$ | async  "></app-logo>
   </div>
 
-  <app-head [title]="title"></app-head>
+  <app-head [title]="title$ | async"></app-head>
 
   <app-action-form></app-action-form>
 

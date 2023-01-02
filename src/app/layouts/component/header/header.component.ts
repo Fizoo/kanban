@@ -1,8 +1,9 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import {TitleNameService} from "../../../services/title-name.service";
-import {buttonsList} from "../../../../assets/data/buttons";
 import {DarkModeService} from "../../../services/dark-mode.service";
+import {Store} from '@ngrx/store';
+import {BtnSelectors} from "../../../store/selectors";
 
 @Component({
   selector: 'app-header',
@@ -12,17 +13,17 @@ import {DarkModeService} from "../../../services/dark-mode.service";
 })
 export class HeaderComponent implements OnInit {
 
-  title:string=buttonsList[0].name  //TODO: use title with async or ngrx
-
-  aSub:Subscription
+  title$:Observable<string>
   isDark$:Observable<boolean>
 
   constructor(private titleService: TitleNameService,
-              private mode:DarkModeService) { }
+              private mode:DarkModeService,
+              private store:Store
+              ) { }
 
   ngOnInit(): void {
-    //this.aSub=this.titleService.titleName$.subscribe(el=>this.title=el)
     this.isDark$=this.mode.darkMode$
+    this.title$=this.store.select(BtnSelectors.activeName)
   }
 
 

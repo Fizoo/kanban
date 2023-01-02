@@ -46,6 +46,11 @@ import {metaReducers, reducers} from "./store";
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ActiveBtnDirective } from './directives/active-btn.directive';
+import { ModalComponent } from './layouts/component/sidebar/sidebar-create-new/modal/modal.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -75,6 +80,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     ContentColumnListComponent,
     ContentTasksComponent,
     ModalWindowComponent,
+    ActiveBtnDirective,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +92,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     MatIconModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     EffectsModule.forRoot([AppEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatInputModule,
 
   ],
   providers: [],

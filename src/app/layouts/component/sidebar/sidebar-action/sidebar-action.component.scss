@@ -3,6 +3,7 @@
   align-items: center;
   text-align: left;
 
+  font-weight: bold;
   padding-left: var(--margin-large);
   padding-bottom: var(--margin-tiny );
   padding-top: var(--margin-tiny );
@@ -18,7 +19,7 @@
   z-index:0;
 
   & > svg {
-    margin-right:var(--margin-small);
+     margin-right:var(--margin-small);
     min-width: 1rem;
   }
 
@@ -35,30 +36,21 @@
     border-radius: 0 25px 25px 0;
   }
 
-  &:hover:not(&--addNew, &--active) {
+  &:hover:not( &--active) {
     color: var(--white);
 
     &::after {
       content: '';
       background-color: var(--lightBlue);
-
     }
   }
   &--active {
     color: var(--white);
+    padding-left: var(--margin-medium);
     &::after {
       content: '';
       background-color: var(--darkBlue);
 
-    }
-  }
-
-  &--addNew {
-    color:var(--darkBlue);
-    transition: opacity .1s ease-out;
-
-    &:hover{
-      opacity: var(--hover);
     }
   }
 
