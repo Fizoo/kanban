@@ -8,6 +8,11 @@ const initialState:Boards[]=Kanban.boards
 export const kanbanReducer=createReducer(
   initialState,
   on(KanbanActions.getAll, state=>state),
+  on(KanbanActions.addBoard,
+    (state,{board})=>{
+    return [...state,board]
+    }
+    ),
   on(KanbanActions.deleteTask,
     (state, {task})=> {
         const newTask=[...state].map(el=>el.columns)

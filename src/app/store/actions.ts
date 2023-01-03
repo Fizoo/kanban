@@ -9,6 +9,7 @@ export enum KanbanNames{
   CheckSubTask='[Kanban] checkSubTask',
   SaveLocalStorage='[Kanban] saveLocalStorage',
   GetWithLocalStorage='[Kanban] getWithLocalStorage',
+  AddBoard='[Kanban] addBoard',
 
   GetUI='[UI] getUI',
   ChangeDarkMode='[UI] changeDarkMode',
@@ -23,6 +24,8 @@ export enum KanbanNames{
 export namespace KanbanActions{
 
   export const getAll=createAction(KanbanNames.GetAll);
+
+  export const addBoard=createAction(KanbanNames.AddBoard,props<{board:Boards}>())
 
   export const moveTask=createAction(KanbanNames.MoveTask,props<{task:Tasks}>());
 
