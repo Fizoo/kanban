@@ -51,10 +51,7 @@ import { ModalComponent } from './layouts/component/sidebar/sidebar-create-new/m
 import {MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
-
-
-
-
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -96,6 +93,7 @@ import {MatInputModule} from "@angular/material/input";
     MatDialogModule,
     BrowserAnimationsModule,
     MatInputModule,
+    FormsModule,
 
   ],
   providers: [],
