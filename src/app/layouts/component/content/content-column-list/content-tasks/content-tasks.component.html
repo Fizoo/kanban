@@ -2,10 +2,10 @@
      class="Card"
      data-bs-toggle="modal"
      data-bs-target="#modalToggle"
-     (click)="clickDiv(el.subtask)">
+     (click)="clickDiv(el.subtasks)">
 
-  <app-content-card [task]="el.task"
-                    [subtask]="el.subtask"
+  <app-content-card [task]="el.title"
+                    [subtask]="el.subtasks"
   ></app-content-card>
 
 </div>

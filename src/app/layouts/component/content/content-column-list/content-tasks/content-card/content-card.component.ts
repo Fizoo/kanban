@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TasksSubtask} from "../../../../../../../assets/data/dataList";
+import {Subtask} from "../../../../../../../assets/data/model";
 
 @Component({
   selector: 'app-content-card',
@@ -8,6 +8,6 @@ import {TasksSubtask} from "../../../../../../../assets/data/dataList";
 })
 export class ContentCardComponent {
   @Input() task:string
-  @Input() subtask:TasksSubtask[]
+  @Input() subtask:Subtask[]
 
 }

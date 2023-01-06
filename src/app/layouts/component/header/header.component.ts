@@ -26,5 +26,4 @@ export class HeaderComponent implements OnInit {
     this.title$=this.store.select(BtnSelectors.activeName)
   }
 
-
 }

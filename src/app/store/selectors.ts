@@ -4,9 +4,20 @@ import {Btn} from "./reducerBtn";
 
 export namespace KanbanSelectors {
   export const kanban = createFeatureSelector<Boards[]>('kanban');
+
   export const allTasks = createSelector(
     kanban,
-    (state) => state
+    (state) => state)
+
+    export const getContentList=(name: string='') =>createSelector(
+      kanban,
+    state => {
+        if(!!name) {
+       return   [...state].filter(el => el.name === name).map(el=>el.columns)[0]
+        }
+        else
+          return   [...state][0].columns
+    }
   )
 
   export const countColumns = createSelector(
@@ -18,7 +29,9 @@ export namespace KanbanSelectors {
 }
 
 export namespace BtnSelectors {
+
   export const btn = createFeatureSelector<Btn[]>('btn')
+
   export const getBtn = createSelector(
     btn,
     state => state
@@ -31,9 +44,11 @@ export namespace BtnSelectors {
   export const activeName = createSelector(
     btn,
     state => {
-      return [...state].filter(el => el.class.includes('SideNav__tab--active'))[0].name
+      return [...state].filter(el => el.class.includes('SideNav__tab--active'))[0].name.trim()
     }
   )
+
+
 
 
 }

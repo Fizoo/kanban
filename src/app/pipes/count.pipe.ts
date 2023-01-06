@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import {TasksSubtask} from "../../assets/data/dataList";
+import {Pipe, PipeTransform} from '@angular/core';
+import {Subtask} from "../../assets/data/model";
 
 
 @Pipe({
@@ -7,8 +7,8 @@ import {TasksSubtask} from "../../assets/data/dataList";
 })
 export class CountPipe implements PipeTransform {
 
-  transform(value: TasksSubtask[] ): string {
-    let one=value.filter(a=>a.checked).length
+  transform(value: Subtask[] ): string {
+    let one=value.filter(a=>a.isCompleted).length
     let two=value.length
     return `${one} of ${two} subtasks`;
   }

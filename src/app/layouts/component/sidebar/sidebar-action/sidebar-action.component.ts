@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {Btn} from "../../../../store/reducerBtn";
 
 @Component({
@@ -12,8 +12,15 @@ export class SidebarActionComponent {
   @Input()
   listMenu:Btn[]|null
 
+  @Output()
+  changeList=new EventEmitter<Btn>()
+
 
   trackByFn(index:number,item:Btn){
       return item.id
+  }
+
+  change(item:Btn){
+    this.changeList.emit(item)
   }
 }

@@ -74,4 +74,8 @@ export class SidebarComponent implements OnInit{
   changeVisible() {
     this.hideService.changeHide()
   }
+
+  changeContent(value:Btn) {
+
+  }
 }

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {ListTasks, TasksSubtask} from "../../../../../../assets/data/dataList";
+import {Subtask, Tasks} from "../../../../../../assets/data/model";
+
 
 @Component({
   selector: 'app-content-tasks',
@@ -7,16 +8,16 @@ import {ListTasks, TasksSubtask} from "../../../../../../assets/data/dataList";
   styleUrls: ['./content-tasks.component.scss']
 })
 export class ContentTasksComponent {
-@Input() el:ListTasks
+@Input() el:Tasks
 
-  subList: TasksSubtask[]
+  subList: Subtask[]
   checkedSubCount: number
   subLength: number
 
-  clickDiv(subtask: TasksSubtask[]) {
+  clickDiv(subtask: Subtask[]) {
     this.subList = subtask
-    this.checkedSubCount = subtask.filter(el => el.checked).length
-    this.subLength = subtask.filter(el => el.checked).length
+    this.checkedSubCount = subtask.filter(el => el.isCompleted).length
+    this.subLength = subtask.filter(el => el.isCompleted).length
     this.subLength = subtask.length
   }
 }

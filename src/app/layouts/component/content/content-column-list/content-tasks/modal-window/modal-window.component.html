@@ -9,9 +9,9 @@
       <div class="modal-body">
         Subtasks (3 of 1)
         <div *ngFor="let item of subList" class="form-check mt-1 p-2 my-3">
-          <input class="form-check-input ms-1" type="checkbox" value="" id="flexCheckDefault1" [checked]="item.checked">
+          <input class="form-check-input ms-1" type="checkbox" value="" id="flexCheckDefault1" [checked]="item.isCompleted">
           <label class="form-check-label ms-2 " for="flexCheckDefault1">
-            {{item.name}}
+            {{item.title}}
           </label>
         </div>
       </div>

@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {List, TasksSubtask} from "../../../../assets/data/dataList";
+import {Component, Input, OnInit} from '@angular/core';
 import {ContentService} from 'src/app/services/content.service';
-import {Observable, Subscription} from "rxjs";
-import {Boards} from "../../../../assets/data/model";
+import {Observable, switchMap} from "rxjs";
+import {Boards, Columns} from "../../../../assets/data/model";
+import {Store} from "@ngrx/store";
+import {BtnSelectors, KanbanSelectors} from "../../../store/selectors";
 
 
 @Component({
@@ -10,50 +11,26 @@ import {Boards} from "../../../../assets/data/model";
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss']
 })
-export class ContentComponent implements OnInit, OnDestroy {
+export class ContentComponent implements OnInit {
+  @Input()
+  activeName:string
 
-  list$: Observable<List>
-  subList: TasksSubtask[]
-  checkedSubCount: number
-  subLength: number
+  list$:Observable<Columns[] >
 
-  aSub: Subscription
-
-  constructor(private contentService: ContentService) {
+  constructor(private contentService: ContentService,
+              private store:Store
+  ) {
   }
 
   ngOnInit(): void {
-    this.list$ = this.contentService.contentList$
-  }
 
-  /*  drop(event: CdkDragDrop<ListTasks[]>) {
-      if (event.previousContainer === event.container) {
-        moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      } else {
-        transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex,
-        );
-      }
-    }*/
-
-  ngOnDestroy(): void {
-    if (this.aSub) {
-      this.aSub.unsubscribe()
-    }
+    this.list$= this.store.select(BtnSelectors.activeName)
+     .pipe(
+       switchMap(el=>this.store.select(KanbanSelectors.getContentList(el))),
+       )
   }
 
   trackByFn(index: number, item: Boards) {
     return item.id
   }
-
-
-  /* clickDiv(subtask: TasksSubtask[]) {
-     this.subList = subtask
-     this.checkedSubCount = subtask.filter(el => el.checked).length
-     this.subLength = subtask.filter(el => el.checked).length
-     this.subLength = subtask.length
-   }*/
 }

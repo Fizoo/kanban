@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {Column, ListTasks} from "../../../../../assets/data/dataList";
+
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {Columns, Tasks} from "../../../../../assets/data/model";
 
 @Component({
   selector: 'app-content-column-list',
@@ -10,11 +11,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag
 })
 export class ContentColumnListComponent {
 
-  @Input() item: Column
+  @Input() item: Columns
 
-
-
-  drop(event: CdkDragDrop<ListTasks[]>) {
+  drop(event: CdkDragDrop<Tasks[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -26,6 +25,4 @@ export class ContentColumnListComponent {
       );
     }
   }
-
-
 }

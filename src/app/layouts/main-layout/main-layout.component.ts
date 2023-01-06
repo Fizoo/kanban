@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DarkModeService } from 'src/app/services/dark-mode.service';
+import {Component, OnInit} from '@angular/core';
+import {DarkModeService} from 'src/app/services/dark-mode.service';
 import {Observable} from "rxjs";
 import {HideAsideService} from "../../services/hide-aside.service";
 
@@ -13,7 +13,7 @@ export class MainLayoutComponent implements OnInit {
   isHide:Observable<boolean>
 
   constructor(private mode:DarkModeService,
-              private hideService:HideAsideService
+              private hideService:HideAsideService,
               ) { }
 
   ngOnInit(): void {
@@ -24,5 +24,4 @@ export class MainLayoutComponent implements OnInit {
   hideAside() {
     this.hideService.changeHide()
   }
-
 }

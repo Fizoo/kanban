@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TasksSubtask} from "../../../../../../../assets/data/dataList";
+import {Subtask} from "../../../../../../../assets/data/model";
 
 @Component({
   selector: 'app-modal-window',
@@ -7,6 +7,6 @@ import {TasksSubtask} from "../../../../../../../assets/data/dataList";
   styleUrls: ['./modal-window.component.scss']
 })
 export class ModalWindowComponent {
-  @Input() subList: TasksSubtask[]
+  @Input() subList:Subtask[]
 
 }

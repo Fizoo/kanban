@@ -1,6 +1,6 @@
 import {Directive, HostListener, Input} from '@angular/core';
 import {Store} from '@ngrx/store';
-import {BtnActions} from "../store/actions";
+import {BtnActions, KanbanActions} from "../store/actions";
 import {Btn} from "../store/reducerBtn";
 
 
@@ -14,6 +14,7 @@ export class ActiveBtnDirective {
   @HostListener('click')
   onClick(){
     this.store.dispatch(BtnActions.activeBtn({item: this.item}))
+    this.store.dispatch(KanbanActions.changeContentList({name:this.item.name}))
   }
 
   constructor(private store:Store) { }

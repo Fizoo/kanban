@@ -10,6 +10,7 @@ export enum KanbanNames{
   SaveLocalStorage='[Kanban] saveLocalStorage',
   GetWithLocalStorage='[Kanban] getWithLocalStorage',
   AddBoard='[Kanban] addBoard',
+  ChangeContentList='[Kanban] changeContentList',
 
   GetUI='[UI] getUI',
   ChangeDarkMode='[UI] changeDarkMode',
@@ -18,7 +19,8 @@ export enum KanbanNames{
   AddBtn='[Btn] add',
   DeleteBtn='[Btn] delete',
   ActiveBtn='[Btn] active',
-  GetActiveName='[Btn] getActiveName'
+  GetActiveName='[Btn] getActiveName',
+  ActiveNameBtn='[Btn] getActiveName'
 }
 
 export namespace KanbanActions{
@@ -26,6 +28,8 @@ export namespace KanbanActions{
   export const getAll=createAction(KanbanNames.GetAll);
 
   export const addBoard=createAction(KanbanNames.AddBoard,props<{board:Boards}>())
+
+  export const changeContentList=createAction(KanbanNames.ChangeContentList,props<{ name:string }>())
 
   export const moveTask=createAction(KanbanNames.MoveTask,props<{task:Tasks}>());
 
@@ -46,4 +50,6 @@ export namespace BtnActions{
   export const addBtn=createAction(KanbanNames.AddBtn,props<{item:Btn}>())
 
   export const activeBtn=createAction(KanbanNames.ActiveBtn,props<{item:Btn}>())
+
+
 }
