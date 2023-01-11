@@ -8,129 +8,17 @@
   user-select: none;
   transition: all .2s ease;
 
-  .Column__title {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--margin-medium);
-    font-size: var(--font-12);
-    font-weight: 700;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    color: var(--mediumGray);
-
-    .Column__title-ball {
-      display: flex;
-      min-width: 15px;
-      height: 15px;
-      border-radius: 100%;
-      margin-right: 12px;
-
-      &--0 {
-        background: #49C4E5;
-      }
-
-      &--1 {
-        background: #8471F2;
-      }
-
-      &--2 {
-        background: #67E2AE;
-      }
-
-      &--3 {
-        background: #e5a449;
-      }
-
-      &--4 {
-        background: #2a3fdb;
-      }
-
-      &--5 {
-        background: #c36e6e;
-      }
-    }
-
-    .Column__title-text {
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      cursor: help;
-    }
-  }
-
   .Column__container {
-    height: 100vh;
+    height: 90vh;
 
-    &--empty {
+    &.empty {
       outline: 1px dashed var(--mediumGrayOpacity);
       outline-width: 2px;
       border-radius: 6px;
-    }
-
-    .Card {
-      display: flex;
-      text-align: left;
-      flex-direction: column;
-      width: 100%;
-      min-height: 5.5rem;
-      background: var(--darkGray);
-      border: 1px solid rgba(#868686, 0.1);
-      border-radius: 8px;
-      box-shadow: 0 4px 6px var(--cardShadow);
-      padding: var(--margin-medium) var(--margin-small);
-      margin-bottom: var(--margin-medium);
-      transition: filter .2s ease;
-
-      cursor: grab;
-
-      &:hover {
-        filter: opacity(45%);
-      }
-
-      &:focus-visible {
-        outline: 2px solid #dd9951;
-      }
-
-      .Card__title {
-        font-size: var(--font-15);
-        font-weight: bold;
-        color: var(--color-text);
-        margin-bottom: var(--margin-tiny);
-
-        text-overflow: ellipsis;
-        word-break: break-word;
-        overflow: hidden;
-      }
-
-      .Card__count {
-        font-size: var(--font-12);
-        font-weight: bold;
-        color: var(--mediumGray);
-      }
-
-    }
-
-  }
-
-  .Column__addNewButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-24);
-    font-weight: bold;
-    color: var(--mediumGray);
-    background: var(--mediumGrayGradient);
-    height: 100%;
-    border-radius: 6px;
-    transition: color .2s ease;
-
-    &:hover {
-      color: var(--darkBlue);
+      width: 17.5rem;
     }
   }
-
 }
-
 
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -142,8 +30,6 @@
   background: var(--darkGray);
   opacity: 0.7;
   color: var(--color-text);
-
-
 }
 
 .cdk-drag-placeholder {
@@ -162,30 +48,5 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.modal {
-  .modal-dialog {
-    .modal-content {
 
-      background: var(--darkGray);
-      color: var(--color-text);
-
-      .modal-header {
-        border-bottom: none;
-
-
-      }
-
-      .modal-body {
-        padding-top: 0;
-
-        .form-check {
-
-          background: var(--bg-main);
-        }
-      }
-
-
-    }
-  }
-}
 

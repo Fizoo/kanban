@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {Store} from "@ngrx/store";
-import {BtnActions, KanbanActions} from "../../../../../store/actions";
+import {KanbanActions} from "../../../../../store/actions";
 import {Boards, Columns} from "../../../../../../assets/data/model";
-import {Btn} from "../../../../../store/reducerBtn";
 
 interface Column {
   column: string
@@ -42,19 +41,15 @@ export class ModalComponent {
         tasks: []
       }
     })
+
     let board: Boards = {
       name: this.name,
       id: new Date().getTime(),
       columns
     }
-    let item: Btn = {
-      name: this.name,
-      id: new Date().getTime(),
-      class: 'SideNav__tab'
-    }
 
     this.store.dispatch(KanbanActions.addBoard({board}))
-    this.store.dispatch(BtnActions.addBtn({item}))
+
     this.dialogRef.close()
   }
 }

@@ -1,37 +1,39 @@
-:host{
+:host {
   display: flex;
   flex-direction: column;
   margin-right: var(--margin-large);
   max-width: 17.5rem;
-  height: 100%;
   color: var(--title);
   user-select: none;
+  height: 75%;
 }
 
-  .title {
-    display: flex;
-    align-items: center;
-    margin-bottom: var(--margin-medium);
-    font-size: var(--font-12);
-    font-weight: 700;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    color: var(--mediumGray);
-  }
-  .addNewButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-24);
-    font-weight: bold;
-    color: var(--mediumGray);
-    background: var(--mediumGrayGradient);
-    height: 100%;
-    border-radius: 6px;
-    transition: color .2s ease;
+.title {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--margin-medium);
+  font-size: var(--font-12);
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--mediumGray);
+}
 
-    &:hover {
-      color: var(--darkBlue);
-    }
+.addNewButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-size: var(--font-24);
+  font-weight: bold;
+  color: var(--mediumGray);
+  background: var(--mediumGrayGradient);
+  height: 100%;
+  border-radius: 6px;
+  transition: color .2s ease;
+
+  &:hover {
+    color: var(--darkBlue);
   }
+}
 

@@ -9,14 +9,13 @@ export namespace KanbanSelectors {
     kanban,
     (state) => state)
 
-    export const getContentList=(name: string='') =>createSelector(
-      kanban,
+  export const getContentList = (name: string = '') => createSelector(
+    kanban,
     state => {
-        if(!!name) {
-       return   [...state].filter(el => el.name === name).map(el=>el.columns)[0]
-        }
-        else
-          return   [...state][0].columns
+      if (!!name) {
+        return [...state].filter(el => el.name === name).map(el => el.columns)[0]
+      } else
+        return [...state][0].columns
     }
   )
 
@@ -24,6 +23,15 @@ export namespace KanbanSelectors {
     kanban,
     state => state.length
   )
+
+  export const getColumnNameById = (id: number) => createSelector(
+    kanban,
+    state => {
+      return [...state].map(el => el.id === id ? el.name : 'No')
+    }
+  )
+
+
 //  export const actual
 
 }
@@ -47,8 +55,4 @@ export namespace BtnSelectors {
       return [...state].filter(el => el.class.includes('SideNav__tab--active'))[0].name.trim()
     }
   )
-
-
-
-
 }

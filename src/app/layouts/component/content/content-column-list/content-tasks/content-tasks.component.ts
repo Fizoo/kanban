@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Subtask, Tasks} from "../../../../../../assets/data/model";
+import {MatDialog} from "@angular/material/dialog";
+import {SubModalComponent} from "./sub-modal/sub-modal.component";
 
 
 @Component({
@@ -8,17 +10,24 @@ import {Subtask, Tasks} from "../../../../../../assets/data/model";
   styleUrls: ['./content-tasks.component.scss']
 })
 export class ContentTasksComponent {
-@Input() el:Tasks
+  @Input() el: Tasks
+
+  constructor(public dialog: MatDialog) {
+  }
 
   subList: Subtask[]
   checkedSubCount: number
   subLength: number
 
-  clickDiv(subtask: Subtask[]) {
-    this.subList = subtask
-    this.checkedSubCount = subtask.filter(el => el.isCompleted).length
-    this.subLength = subtask.filter(el => el.isCompleted).length
-    this.subLength = subtask.length
+  clickDiv(el: Tasks) {
+    this.dialog.open(SubModalComponent, {
+      data: el
+    });
+
+    /* this.subList = subtask
+     this.checkedSubCount = subtask.filter(el => el.isCompleted).length
+     this.subLength = subtask.filter(el => el.isCompleted).length
+     this.subLength = subtask.length*/
   }
 }
 

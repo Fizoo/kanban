@@ -1,0 +1,61 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background: var(--darkGray);
+  color: var(--color-text);
+  padding: 1.5rem;
+  width: 500px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      color: var(--color-text);
+      padding-left: 0;
+    }
+
+    .btn-title {
+      background: var(--darkGray);
+
+      span {
+        background: var(--darkGray);
+      }
+    }
+  }
+
+  .description {
+    span {
+      color: white;
+      opacity: 0.5;
+      font-size: var(--font-12);
+    }
+  }
+
+  .content {
+    padding-left: 0;
+    color: var(--color-text);
+
+    mat-list-option {
+      background: var(--bg-main);
+      margin-bottom: 5px;
+      border-radius: 10px;
+
+      &:hover {
+        background: rgba(99, 95, 199, .25);
+      }
+
+      .item {
+        color: white;
+
+        &.check {
+          text-decoration: line-through;
+          opacity: 0.5;
+        }
+      }
+    }
+
+  }
+}
+

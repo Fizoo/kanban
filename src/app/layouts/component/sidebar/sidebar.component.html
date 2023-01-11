@@ -1,19 +1,18 @@
+<div class="SideNav__top">
+  <app-sidebar-head [count]="btnCount$ | async  "></app-sidebar-head>
 
-  <div class="SideNav__top">
-    <app-sidebar-head [count]= "btnCount$ | async  "></app-sidebar-head>
+  <app-sidebar-action
+    [listMenu]="listButton$ | async "
 
-    <app-sidebar-action
-      [listMenu]="listButton$ | async "
-      (changeList)="changeContent($event)"
-    ></app-sidebar-action>
+  ></app-sidebar-action>
 
-    <app-sidebar-create-new></app-sidebar-create-new>
-  </div>
+  <app-sidebar-create-new></app-sidebar-create-new>
+</div>
 
-  <div class="SideNav__bottom">
-    <app-sidebar-dark-mode [mode]="mode$ | async " (modeFn)="toggleMode()"></app-sidebar-dark-mode>
+<div class="SideNav__bottom">
+  <app-sidebar-dark-mode [mode]="mode$ | async " (modeFn)="toggleMode()"></app-sidebar-dark-mode>
 
-    <app-sidebar-hide (show)="changeVisible()"></app-sidebar-hide>
-  </div>
+  <app-sidebar-hide (show)="changeVisible()"></app-sidebar-hide>
+</div>
 
 

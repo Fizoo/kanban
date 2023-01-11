@@ -8,6 +8,7 @@ import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 })
 export class LogoComponent {
   @Input()
-  isDark:boolean|null
+  isDark: boolean | null
+
 
 }

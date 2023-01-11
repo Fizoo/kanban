@@ -3,31 +3,47 @@ import {Kanban} from "../../assets/data/data";
 import {createReducer, on} from "@ngrx/store";
 import {KanbanActions} from "./actions";
 
-const initialState:Boards[]=Kanban.boards
+const initialState: Boards[] = Kanban.boards
 
-export const kanbanReducer=createReducer(
+export const kanbanReducer = createReducer(
   initialState,
-  on(KanbanActions.getAll, state=>state),
+  on(KanbanActions.getAll, state => state),
 
   on(KanbanActions.addBoard,
-    (state,{board})=>{
-    return [...state,board]
+    (state, {board}) => {
+      return [...state, board]
     }),
 
   on(KanbanActions.changeContentList,
-    state=>state),
+    state => state),
 
   on(KanbanActions.deleteTask,
-    (state, {task})=> {
-        const newTask=[...state].map(el=>el.columns)
-      return [
-        ...state,
-      ]
+    (state, {task}) => {
+      console.log('state1', state)
+      return [...state].map(b => {
+        if (b.id === task.statusId) {
+          let newColumn = b.columns.map(c => ({
+              ...c,
+              tasks: c.tasks.filter(t => t.id !== task.id)
+            })
+          )
+          return ({
+            ...b,
+            columns: newColumn
+          })
+        } else
+          return b
+      })
+    }
+  ),
+  on(KanbanActions.editTask,
+    (state, {task}) => {
+      return state
     }
   ),
   on(KanbanActions.moveTask,
-    (state,{task})=> {
-    return [...state]
+    (state, {task}) => {
+      return [...state]
     }
-)
+  )
 )

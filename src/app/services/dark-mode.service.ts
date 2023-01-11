@@ -6,12 +6,13 @@ import {BehaviorSubject} from "rxjs";
 })
 export class DarkModeService {
 
-  public darkMode$=new BehaviorSubject<boolean>(false);
+  public darkMode$ = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor() {
+  }
 
   toogleMode(): void {
-    let temp=this.darkMode$.getValue()
+    let temp = this.darkMode$.getValue()
     this.darkMode$.next(!temp)
   }
 }

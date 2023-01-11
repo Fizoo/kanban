@@ -7,5 +7,9 @@ import {Component, Input} from '@angular/core';
 })
 export class ContentColumnNameComponent {
   @Input() name: string
+  @Input() index: number
 
+  columnClass(index: number): string {
+    return `Column__title-ball--${index}`;
+  }
 }

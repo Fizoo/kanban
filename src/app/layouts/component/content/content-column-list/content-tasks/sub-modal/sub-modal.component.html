@@ -1,0 +1,62 @@
+<form class="form">
+
+  <div class="title">
+    <h1 mat-dialog-title>Add New Board</h1>
+    <button mat-icon-button class="btn-title" [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Edit</button>
+      <button mat-menu-item (click)="deleteTask()">Delete</button>
+    </mat-menu>
+  </div>
+
+  <div class="description">
+    <span>{{data.description}}</span>
+  </div>
+
+
+  <div class="content" mat-dialog-content>
+    Subtasks (1 of 3)
+
+    <mat-selection-list (selectionChange)="onChange($event)" color="primary" #shoes>
+      <mat-list-option
+        checkboxPosition="before"
+        *ngFor="let item of data.subtasks"
+        [selected]="item.isCompleted"
+        [value]="item"
+        (click)="select(data)"
+        [appChecked]="item.isCompleted"
+      >
+        <span class="item">{{item.title}}</span>
+      </mat-list-option>
+    </mat-selection-list>
+
+    <p>Current Status</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Column</mat-label>
+      <mat-select>
+        <mat-option (select)="data.subtasks[0].title" *ngFor="let food of [1,2,3]" [value]="food">
+          {{food}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="actions" mat-dialog-actions>
+
+    <button class="btnForm"
+            mat-raised-button
+            color="accent">
+      Submit
+    </button>
+
+    <button
+      class="btnForm" mat-raised-button
+      (click)="closed()"
+      color="primary">
+      Close
+    </button>
+  </div>
+</form>

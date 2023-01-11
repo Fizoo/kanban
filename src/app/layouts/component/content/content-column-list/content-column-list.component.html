@@ -1,8 +1,12 @@
 <div class="Column">
 
-  <app-content-column-name [name]="item.name"></app-content-column-name>
+  <app-content-column-name
+    [name]="item.name"
+    [index]="index"
+  ></app-content-column-name>
 
   <div class="Column__container "
+       [class.empty]="isEmptyColumnFn(item)"
        cdkDropList
        [cdkDropListData]="item.tasks"
        (cdkDropListDropped)="drop($event)">

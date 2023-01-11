@@ -1,6 +1,6 @@
 .SideNav__theme-mode {
-  display:flex;
-  background-color:var(--themeSwitchBox);
+  display: flex;
+  background-color: var(--themeSwitchBox);
   justify-content: center;
   align-items: center;
   width: 235px;
@@ -8,10 +8,12 @@
   margin-left: var(--margin-medium);
   border-radius: 6px;
 
+
   /* @include mobile {
      margin-left: 0;
    }*/
 }
+
 .SideNav__theme-toggle {
   display: flex;
   margin: 0 26px;
@@ -20,7 +22,7 @@
   height: 20px;
   background: var(--darkBlue);
   border-radius: 12px;
-  position:relative;
+  position: relative;
 
   &--ball {
     position: absolute;

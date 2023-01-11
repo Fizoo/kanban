@@ -1,16 +1,25 @@
+:host {
+  display: grid;
+  place-items: center;
+}
+
 .SideNav__hideButton {
+
   font-size: var(--font-15);
   color: var(--mediumGray);
   background: inherit;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-left: var(--margin-large);
-  margin-top: var(--margin-small) ;
+  //margin-left: var(--margin-large);
+  margin-top: var(--margin-small);
   transition: opacity .1s ease-out;
+  margin-bottom: 1rem;
 
   &:hover {
     opacity: var(--hover);
   }
+
   /*
     @include mobile {
       display: none;
