@@ -24,11 +24,14 @@ export namespace KanbanSelectors {
     state => state.length
   )
 
-  export const getColumnNameById = (id: number) => createSelector(
+  export const getColumnStatusById = (id: number) => createSelector(
     kanban,
-    state => {
-      return [...state].map(el => el.id === id ? el.name : 'No')
-    }
+    state => [...state].filter(b => b.id === id).map(c => c.columns)[0].map(el => el.name)
+
+    /*.filter(t => t.filter(a => a.tasks.filter(e => e.title === item.title))*/
+    // )
+    /*.map(c => c.columns
+    .filter(t => t.tasks.filter(a => a.title === item.title)[0]))*/
   )
 
 

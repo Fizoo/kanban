@@ -6,7 +6,6 @@ import {DarkModeService} from "../services/dark-mode.service";
 })
 export class LogoDirective implements OnInit {
 
-
   constructor(private el: ElementRef,
               private r: Renderer2,
               private changes: ChangeDetectorRef,
@@ -27,8 +26,5 @@ export class LogoDirective implements OnInit {
     } else {
       this.r.setAttribute(this.el.nativeElement, 'src', 'assets/image/logo-dark.svg')
     }
-
   }
-
-
 }

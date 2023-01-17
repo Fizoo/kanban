@@ -1,7 +1,7 @@
 <form class="form">
 
   <div class="title">
-    <h1 mat-dialog-title>Add New Board</h1>
+    <h1 mat-dialog-title>Build settings UI</h1>
     <button mat-icon-button class="btn-title" [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -36,9 +36,15 @@
     <p>Current Status</p>
     <mat-form-field appearance="fill">
       <mat-label>Column</mat-label>
-      <mat-select>
-        <mat-option (select)="data.subtasks[0].title" *ngFor="let food of [1,2,3]" [value]="food">
-          {{food}}
+      <mat-select (selectionChange)="move($event)"
+                  [(value)]="actualColumns"
+                  panelClass="panel">
+        <mat-option
+          *ngFor="let value of columnStatus$ | async"
+          [value]="value"
+          [disabled]="data.status===value"
+        >
+          {{value}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -46,9 +52,11 @@
 
   <div class="actions" mat-dialog-actions>
 
-    <button class="btnForm"
-            mat-raised-button
-            color="accent">
+    <button
+      type="submit"
+      (click)="submit()"
+      mat-raised-button
+      color="accent">
       Submit
     </button>
 

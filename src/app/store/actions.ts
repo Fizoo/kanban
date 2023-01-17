@@ -14,6 +14,8 @@ export enum KanbanNames {
   AddBoard = '[Kanban] addBoard',
   ChangeContentList = '[Kanban] changeContentList',
   EditTask = '[Kanban] editTask',
+  MoveTaskByStatus = '[Kanban] moveTaskByStatus',
+  ChangeTaskSubtaskCheck = '[Kanban] changeTaskSubtaskCheck',
 
   //UI actions
   GetUI = '[UI] getUI',
@@ -42,12 +44,15 @@ export namespace KanbanActions {
 
   export const deleteTask = createAction(KanbanNames.DeleteTask, props<{ task: Tasks }>())
 
+  export const moveTaskByStatus = createAction(KanbanNames.MoveTaskByStatus, props<{ task: Tasks, newStatus: string, oldStatus: string }>())
+
   export const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
 
   export const saveLocalStorage = createAction(KanbanNames.SaveLocalStorage, props<{ list: Boards }>())
 
   export const getWithLocalStorage = createAction(KanbanNames.GetWithLocalStorage, props<{ list: Boards }>())
 
+  export const changeTaskSubtaskCheck = createAction(KanbanNames.ChangeTaskSubtaskCheck, props<{ task: Tasks }>())
 
 }
 
