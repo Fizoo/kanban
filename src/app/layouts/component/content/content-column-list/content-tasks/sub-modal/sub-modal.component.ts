@@ -1,13 +1,14 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Tasks} from "../../../../../../../assets/data/model";
 import {DIALOG_DATA} from "@angular/cdk/dialog";
 import {MatSelectionListChange} from "@angular/material/list";
 import {Store} from "@ngrx/store";
 import {KanbanActions} from "../../../../../../store/actions";
 import {Observable, tap} from "rxjs";
-import {KanbanSelectors} from "../../../../../../store/selectors";
+import {BtnSelectors, KanbanSelectors} from "../../../../../../store/selectors";
 import {MatSelectChange} from "@angular/material/select";
+import {EditTaskDialogComponent} from "./edit-task-dialog/edit-task-dialog.component";
 
 
 @Component({
@@ -20,7 +21,7 @@ import {MatSelectChange} from "@angular/material/select";
 export class SubModalComponent implements OnInit {
 
   columnStatus$: Observable<string[]>
-
+  actualList: string
   actualColumns: string = ''
   isChanged = false
   oldDate: Tasks
@@ -29,7 +30,8 @@ export class SubModalComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<SubModalComponent>,
               @Inject(DIALOG_DATA) public data: Tasks,
               private store: Store,
-              private changeDetector: ChangeDetectorRef
+              private changeDetector: ChangeDetectorRef,
+              public dialog: MatDialog
   ) {
   }
 
@@ -39,6 +41,9 @@ export class SubModalComponent implements OnInit {
         this.actualColumns = this.data.status
       }))
     this.oldDate = this.data
+
+    this.store.select(BtnSelectors.activeName).subscribe((el) => this.actualList = el)
+
 
   }
 
@@ -80,16 +85,30 @@ export class SubModalComponent implements OnInit {
     this.store.dispatch(KanbanActions.moveTaskByStatus({
       task: this.data,
       newStatus: statusNew,
-      oldStatus: oldStatus
+      oldStatus: oldStatus,
+      activeList: this.actualList
     }))
-    this.changeDetector.detectChanges()
+    this.dialogRef.close()
 
   }
 
   submit() {
-    this.store.dispatch(KanbanActions.changeTaskSubtaskCheck({task: this.data}))
+    if (this.isChange()) {
+      this.store.dispatch(KanbanActions.changeTaskSubtaskCheck({task: this.data}))
+    }
+    this.dialogRef.close()
+  }
 
-    this.changeDetector.detectChanges()
+  isChange(): boolean {
+    return !this.data.subtasks.every((el, i) => this.oldDate.subtasks.map(a => a.isCompleted)[i] === el.isCompleted)
+
+  }
+
+  editTaskModel(data: Tasks) {
+    this.dialog.open(EditTaskDialogComponent,
+      {
+        data: data
+      })
     this.dialogRef.close()
   }
 }

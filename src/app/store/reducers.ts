@@ -36,56 +36,36 @@ export const kanbanReducer = createReducer(
     }
   ),
   on(KanbanActions.moveTaskByStatus,
-    (state, {task, newStatus, oldStatus}) => {
-      return [...state].map(b => ({
-        ...b,
-        columns: b.columns.map(c => {
-          if (c.name === oldStatus) {
+    (state, {task, newStatus, oldStatus, activeList}) => {
+      console.log(activeList)
+      return [...state].map(b => {
+          if (b.name === activeList) {
             return ({
-              ...c,
-              tasks: c.tasks.filter(el => el.id !== task.id)
+              ...b,
+              columns: b.columns.map(c => {
+                if (c.name === oldStatus) {
+                  return ({
+                    ...c,
+                    tasks: [...c.tasks.filter(el => el.id !== task.id)]
+                  })
+                } else if (c.name === newStatus) {
+                  let newTask: Tasks = {
+                    ...task,
+                    status: newStatus,
+                    statusId: c.id,
+                  }
+                  return ({
+                    ...c,
+                    tasks: [...c.tasks, newTask]
+                  })
+                } else return c
+              })
             })
-          } else if (c.name === newStatus) {
-            let newTask: Tasks = {
-              ...task,
-              status: newStatus,
-              statusId: c.id,
-            }
-            return ({
-              ...c,
-              tasks: [...c.tasks, newTask]
-            })
-          } else return c
-        })
-      }))
+          } else return b
+        }
+      )
     }
   ),
-
-  /*    ({...b,
-        columns:b.columns.map(el => {
-        if (el.name === newStatus) {
-          console.log('newStatus1', el);
-          el = {
-            ...el,
-            tasks: [...el.tasks, task]
-          }
-          console.log('newStatus1', el);
-        }
-        if (el.name === oldStatus) {
-          console.log('old1', el)
-          el = {
-            ...el,
-            tasks: el.tasks.filter(t => t.id !== task.id)
-          }
-          console.log('old2', el)
-        }
-        console.log('newColumn', el)
-        return el
-      })
-
-    })*/
-
-
 
   on(KanbanActions.editTask,
     (state, {task}) => {

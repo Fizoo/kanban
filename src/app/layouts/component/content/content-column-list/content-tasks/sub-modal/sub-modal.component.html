@@ -7,8 +7,10 @@
     </button>
 
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Edit</button>
-      <button mat-menu-item (click)="deleteTask()">Delete</button>
+      <button mat-menu-item (click)="editTaskModel(data)">Edit</button>
+      <button mat-menu-item (click)="deleteTask()">
+        <span [style.color]="'red'">Delete</span>
+      </button>
     </mat-menu>
   </div>
 

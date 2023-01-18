@@ -2,7 +2,9 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {Boards} from "../../assets/data/model";
 import {Btn} from "./reducerBtn";
 
+
 export namespace KanbanSelectors {
+
   export const kanban = createFeatureSelector<Boards[]>('kanban');
 
   export const allTasks = createSelector(
@@ -26,12 +28,9 @@ export namespace KanbanSelectors {
 
   export const getColumnStatusById = (id: number) => createSelector(
     kanban,
-    state => [...state].filter(b => b.id === id).map(c => c.columns)[0].map(el => el.name)
-
-    /*.filter(t => t.filter(a => a.tasks.filter(e => e.title === item.title))*/
-    // )
-    /*.map(c => c.columns
-    .filter(t => t.tasks.filter(a => a.title === item.title)[0]))*/
+    BtnSelectors.activeName,
+    (state, name) => [...state].filter(b => b.name === name)
+      .map(el => el.columns.map(a => a.name))[0]
   )
 
 

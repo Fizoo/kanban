@@ -1,0 +1,82 @@
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+  <h1 class="h1" mat-dialog-title>Edit Task</h1>
+
+  <div class="content" mat-dialog-content>
+
+    <mat-form-field class="Title">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title"
+             [value]="data.title"
+             formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field class="Description">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description"
+                [value]="data.description"
+                formControlName="description"
+      ></textarea>
+    </mat-form-field>
+
+    <p>Subtasks
+      <span *ngIf="!subTasks.controls.length">: None subtasks.Add first,please!!!</span></p>
+
+    <div
+      class="input-column"
+      formArrayName="subTasks"
+      *ngFor="let itemControl of subTasks.controls; index as i">
+
+
+      <mat-form-field [formGroupName]="i" class="form-field">
+        <!--<mat-label>{{itemControl.value.title}}</mat-label>-->
+        <input matInput type="text" formControlName="title">
+        <!-- <input matInput type="text" [formControlName]="item.title" [value]="item.title">-->
+        <!--<button *ngIf="item" matSuffix mat-icon-button aria-label="Clear">
+          <mat-icon>close</mat-icon>
+        </button>-->
+      </mat-form-field>
+
+      <button
+        class="btn-closed"
+        matSuffix
+        mat-icon-button
+        (click)="deleteSub(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <button color="accent" mat-raised-button (click)="addSub()">
+      <mat-icon>add</mat-icon>
+      Add New Subtask
+    </button>
+
+    <p>Status</p>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Column</mat-label>
+        <mat-select
+          formControlName="columns"
+
+          panelClass="panel">
+          <mat-option
+            *ngFor="let value of columnStatus$ | async"
+            [value]="value"
+          >
+            {{value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button
+      type="submit"
+      color="primary"
+      mat-raised-button
+      [disabled]="this.form.invalid"
+    >Save Change
+    </button>
+
+  </div>
+</form>

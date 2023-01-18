@@ -1,0 +1,52 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background: var(--darkGray);
+  color: var(--color-text);
+  padding: 1.5rem;
+  width: 600px;
+
+  .h1 {
+    color: var(--color-text);
+    text-align: center;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      padding: 0.5rem 0;
+    }
+
+
+    .input-column {
+      width: 100%;
+      display: flex;
+
+
+      .form-field {
+        width: 100%;
+      }
+
+      .btn-closed {
+        color: #e3e1e1;
+        height: 100%;
+        margin-top: 5px;
+      }
+
+    }
+
+  }
+
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: white;
+}
+
+.mat-mdc-form-field {
+  //overflow-x: hidden;
+  width: 95%;
+
+}

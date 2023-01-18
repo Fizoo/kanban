@@ -10,7 +10,8 @@
   transition: left .2s ease;
   padding: var(--margin-medium) var(--margin-large);
   cursor: move;
-  overflow-y: auto;
+  // overflow-y: auto;
+  margin-bottom: 1rem;
 
 }
 

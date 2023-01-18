@@ -44,7 +44,7 @@ export namespace KanbanActions {
 
   export const deleteTask = createAction(KanbanNames.DeleteTask, props<{ task: Tasks }>())
 
-  export const moveTaskByStatus = createAction(KanbanNames.MoveTaskByStatus, props<{ task: Tasks, newStatus: string, oldStatus: string }>())
+  export const moveTaskByStatus = createAction(KanbanNames.MoveTaskByStatus, props<{ task: Tasks, newStatus: string, oldStatus: string, activeList: string }>())
 
   export const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
 
