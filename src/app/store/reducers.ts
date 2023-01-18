@@ -69,7 +69,21 @@ export const kanbanReducer = createReducer(
 
   on(KanbanActions.editTask,
     (state, {task}) => {
-      return state
+      return [...state].map(b => ({
+        ...b,
+        columns: b.columns.map(c => {
+          if (c.name === task.status) {
+            return ({
+              ...c,
+              tasks: c.tasks.map(t => {
+                if (t.id === task.id) {
+                  return task
+                } else return t
+              })
+            })
+          } else return c
+        })
+      }))
     }
   ),
   on(KanbanActions.moveTask,

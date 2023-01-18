@@ -1,7 +1,7 @@
 <form class="form">
 
   <div class="title">
-    <h1 mat-dialog-title>Build settings UI</h1>
+    <h1 mat-dialog-title>{{data.title}}</h1>
     <button mat-icon-button class="btn-title" [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -20,7 +20,7 @@
 
 
   <div class="content" mat-dialog-content>
-    Subtasks (1 of 3)
+    Subtasks ({{subTrue}} of {{subAll}})
 
     <mat-selection-list (selectionChange)="onChange($event)" color="primary" #shoes>
       <mat-list-option
@@ -29,8 +29,7 @@
         [selected]="item.isCompleted"
         [value]="item"
         (click)="select(data)"
-        [appChecked]="item.isCompleted"
-      >
+        [appChecked]="item.isCompleted">
         <span class="item">{{item.title}}</span>
       </mat-list-option>
     </mat-selection-list>

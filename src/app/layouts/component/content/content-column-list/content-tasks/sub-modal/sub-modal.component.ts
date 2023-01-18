@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Tasks} from "../../../../../../../assets/data/model";
 import {DIALOG_DATA} from "@angular/cdk/dialog";
@@ -25,12 +25,13 @@ export class SubModalComponent implements OnInit {
   actualColumns: string = ''
   isChanged = false
   oldDate: Tasks
+  subAll: number
+  subTrue: number
 
 
   constructor(public dialogRef: MatDialogRef<SubModalComponent>,
               @Inject(DIALOG_DATA) public data: Tasks,
               private store: Store,
-              private changeDetector: ChangeDetectorRef,
               public dialog: MatDialog
   ) {
   }
@@ -40,11 +41,10 @@ export class SubModalComponent implements OnInit {
       .pipe(tap(() => {
         this.actualColumns = this.data.status
       }))
-    this.oldDate = this.data
-
     this.store.select(BtnSelectors.activeName).subscribe((el) => this.actualList = el)
-
-
+    this.oldDate = this.data
+    this.subAll = this.data.subtasks.length
+    this.subTrue = this.data.subtasks.filter(el => el.isCompleted).length
   }
 
   closed() {
@@ -68,6 +68,8 @@ export class SubModalComponent implements OnInit {
         return el
       })
     }
+    this.subTrue = this.data.subtasks.filter(el => el.isCompleted).length
+
   }
 
   deleteTask() {

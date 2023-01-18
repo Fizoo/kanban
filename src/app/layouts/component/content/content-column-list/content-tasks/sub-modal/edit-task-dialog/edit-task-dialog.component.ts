@@ -6,6 +6,7 @@ import {Store} from "@ngrx/store";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {KanbanSelectors} from "../../../../../../../store/selectors";
+import {KanbanActions} from "../../../../../../../store/actions";
 
 @Component({
   selector: 'app-edit-task-dialog',
@@ -28,8 +29,8 @@ export class EditTaskDialogComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [this.data.title, Validators.required],
       description: [this.data.description],
-      columns: [this.data.status],
-      subTasks: this.formBuilder.array([...this.data.subtasks.map((el) => this.addSkillFormGroup(el))]),
+      status: [this.data.status],
+      subtasks: this.formBuilder.array([...this.data.subtasks.map((el) => this.addSkillFormGroup(el))]),
     })
 
     this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById(this.data.statusId))
@@ -43,24 +44,36 @@ export class EditTaskDialogComponent implements OnInit {
     });
   }
 
-  get columns() {
-    return this.form.get('columns');
-  }
-
-  get subTasks() {
-    return (this.form.controls['subTasks'] as FormArray)
-  }
-
   onSubmit() {
     console.log(this.form.value)
-    console.log(this.form)
+    //TODO : change statusId on status by id
+    let task: Tasks = {
+      ...this.form.value,
+      id: this.data.id,
+      statusId: this.data.statusId
+    }
+    this.store.dispatch(KanbanActions.editTask({task}))
+    this.dialogRef.close()
   }
 
   deleteSub(i: number) {
-    this.subTasks.removeAt(i)
+    this.subtasks.removeAt(i)
   }
 
   addSub() {
-    this.subTasks.push(this.addSkillFormGroup())
+    this.subtasks.push(this.addSkillFormGroup())
+  }
+
+
+  get status() {
+    return this.form.get('status');
+  }
+
+  get subtasks() {
+    return (this.form.controls['subtasks'] as FormArray)
+  }
+
+  get title() {
+    return this.form.controls['title']
   }
 }
