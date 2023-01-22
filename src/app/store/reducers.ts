@@ -3,6 +3,10 @@ import {Kanban} from "../../assets/data/data";
 import {createReducer, on} from "@ngrx/store";
 import {KanbanActions} from "./actions";
 
+export interface IKanban {
+  board: Boards[]
+  activeListName: string
+}
 
 const initialState: Boards[] = Kanban.boards
 

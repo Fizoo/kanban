@@ -46,7 +46,7 @@ export class EditTaskDialogComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form.value)
-    //TODO : change statusId on status by id
+    //TODO : change statusId with change status
     let task: Tasks = {
       ...this.form.value,
       id: this.data.id,

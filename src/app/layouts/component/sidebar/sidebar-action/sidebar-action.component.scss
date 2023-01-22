@@ -3,23 +3,24 @@
   align-items: center;
   text-align: left;
 
+  font-size: var(--font-15);
   font-weight: bold;
   padding-left: var(--margin-large);
-  padding-bottom: var(--margin-tiny );
-  padding-top: var(--margin-tiny );
+  padding-bottom: var(--margin-tiny);
+  padding-top: var(--margin-tiny);
   width: 17.25rem;
   min-height: 2.8rem;
   height: fit-content;
   word-break: break-word;
-  margin-bottom:.2rem;
+  margin-bottom: .2rem;
   position: relative;
   background: transparent;
   transition: color .2s ease;
   color: inherit;
-  z-index:0;
+  z-index: 0;
 
   & > svg {
-     margin-right:var(--margin-small);
+    margin-right: var(--margin-small);
     min-width: 1rem;
   }
 
@@ -29,8 +30,8 @@
     z-index: -1;
     display: flex;
     background-color: transparent;
-    position:absolute;
-    left:0;
+    position: absolute;
+    left: 0;
     width: 100%;
     height: 100%;
     border-radius: 0 25px 25px 0;
@@ -44,9 +45,11 @@
       background-color: var(--lightBlue);
     }
   }
+
   &--active {
     color: var(--white);
     padding-left: var(--margin-medium);
+
     &::after {
       content: '';
       background-color: var(--darkBlue);

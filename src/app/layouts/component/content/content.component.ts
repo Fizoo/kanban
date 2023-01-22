@@ -21,7 +21,6 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.list$ = this.store.select(BtnSelectors.activeName)
       .pipe(
         switchMap(el => this.store.select(KanbanSelectors.getContentList(el))),

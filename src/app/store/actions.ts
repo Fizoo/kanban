@@ -38,6 +38,7 @@ export namespace KanbanActions {
 
   export const changeContentList = createAction(KanbanNames.ChangeContentList, props<{ name: string }>())
 
+
   export const moveTask = createAction(KanbanNames.MoveTask, props<{ task: Tasks }>());
 
   export const editTask = createAction(KanbanNames.EditTask, props<{ task: Tasks }>());

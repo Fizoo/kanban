@@ -10,17 +10,16 @@ import {Btn} from "../../../../store/reducerBtn";
 export class SidebarActionComponent {
 
   @Input()
-  listMenu:Btn[]|null
+  listMenu: Btn[] | null
 
   @Output()
-  changeList=new EventEmitter<Btn>()
+  changeList = new EventEmitter<Btn>()
 
-
-  trackByFn(index:number,item:Btn){
-      return item.id
+  trackByFn(index: number, item: Btn) {
+    return item.id
   }
 
-  change(item:Btn){
+  change(item: Btn) {
     this.changeList.emit(item)
   }
 }
