@@ -1,17 +1,16 @@
 import {isDevMode} from '@angular/core';
 import {ActionReducerMap, MetaReducer} from '@ngrx/store';
-import {Boards} from "../../assets/data/model";
-import {kanbanReducer} from "./reducers";
 import {Btn, buttonReducer} from "./reducerBtn";
+import {IKanban, listReducer} from "./reducerList";
 
 export interface State {
-    kanban:Boards[]
-    btn:Btn[]
+  kanban: IKanban
+  btn: Btn[]
 }
 
 export const reducers: ActionReducerMap<State> = {
-    kanban:kanbanReducer,
-    btn:buttonReducer
+  kanban: listReducer,
+  btn: buttonReducer
 };
 
 export const metaReducers: MetaReducer<State>[] = isDevMode() ? [] : [];

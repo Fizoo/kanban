@@ -1,12 +1,8 @@
-import {Boards, Tasks} from "../../assets/data/model";
+import {Boards} from "../../assets/data/model";
 import {Kanban} from "../../assets/data/data";
 import {createReducer, on} from "@ngrx/store";
 import {KanbanActions} from "./actions";
 
-export interface IKanban {
-  board: Boards[]
-  activeListName: string
-}
 
 const initialState: Boards[] = Kanban.boards
 
@@ -18,6 +14,7 @@ export const kanbanReducer = createReducer(
     (state, {board}) => {
       return [...state, board]
     }),
+
 
   on(KanbanActions.changeContentList,
     state => state),
@@ -39,37 +36,37 @@ export const kanbanReducer = createReducer(
       })
     }
   ),
-  on(KanbanActions.moveTaskByStatus,
-    (state, {task, newStatus, oldStatus, activeList}) => {
-      console.log(activeList)
-      return [...state].map(b => {
-          if (b.name === activeList) {
-            return ({
-              ...b,
-              columns: b.columns.map(c => {
-                if (c.name === oldStatus) {
-                  return ({
-                    ...c,
-                    tasks: [...c.tasks.filter(el => el.id !== task.id)]
-                  })
-                } else if (c.name === newStatus) {
-                  let newTask: Tasks = {
-                    ...task,
-                    status: newStatus,
-                    statusId: c.id,
-                  }
-                  return ({
-                    ...c,
-                    tasks: [...c.tasks, newTask]
-                  })
-                } else return c
-              })
-            })
-          } else return b
-        }
-      )
-    }
-  ),
+  /* on(KanbanActions.moveTaskByStatus,
+     (state, {task, newStatus, oldStatus}) => {
+       console.log(activeList)
+       return [...state].map(b => {
+           if (b.name === activeList) {
+             return ({
+               ...b,
+               columns: b.columns.map(c => {
+                 if (c.name === oldStatus) {
+                   return ({
+                     ...c,
+                     tasks: [...c.tasks.filter(el => el.id !== task.id)]
+                   })
+                 } else if (c.name === newStatus) {
+                   let newTask: Tasks = {
+                     ...task,
+                     status: newStatus,
+                     statusId: c.id,
+                   }
+                   return ({
+                     ...c,
+                     tasks: [...c.tasks, newTask]
+                   })
+                 } else return c
+               })
+             })
+           } else return b
+         }
+       )
+     }
+   ),*/
 
   on(KanbanActions.editTask,
     (state, {task}) => {

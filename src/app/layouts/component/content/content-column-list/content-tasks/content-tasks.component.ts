@@ -10,6 +10,7 @@ import {SubModalComponent} from "./sub-modal/sub-modal.component";
   styleUrls: ['./content-tasks.component.scss']
 })
 export class ContentTasksComponent {
+
   @Input() el: Tasks
 
   constructor(public dialog: MatDialog) {
@@ -24,10 +25,6 @@ export class ContentTasksComponent {
       data: el
     });
 
-    /* this.subList = subtask
-     this.checkedSubCount = subtask.filter(el => el.isCompleted).length
-     this.subLength = subtask.filter(el => el.isCompleted).length
-     this.subLength = subtask.length*/
   }
 }
 

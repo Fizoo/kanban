@@ -37,7 +37,7 @@ export class SubModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById(this.data.statusId))
+    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById)
       .pipe(tap(() => {
         this.actualColumns = this.data.status
       }))
@@ -87,8 +87,7 @@ export class SubModalComponent implements OnInit {
     this.store.dispatch(KanbanActions.moveTaskByStatus({
       task: this.data,
       newStatus: statusNew,
-      oldStatus: oldStatus,
-      activeList: this.actualList
+      oldStatus: oldStatus
     }))
     this.dialogRef.close()
 

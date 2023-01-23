@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Observable, switchMap} from "rxjs";
+import {Observable} from "rxjs";
 import {Columns} from "../../../../assets/data/model";
 import {Store} from "@ngrx/store";
-import {BtnSelectors, KanbanSelectors} from "../../../store/selectors";
+import {KanbanSelectors} from "../../../store/selectors";
 
 
 @Component({
@@ -21,10 +21,7 @@ export class ContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.list$ = this.store.select(BtnSelectors.activeName)
-      .pipe(
-        switchMap(el => this.store.select(KanbanSelectors.getContentList(el))),
-      )
+    this.list$ = this.store.select(KanbanSelectors.getActualList)
   }
 
   trackByFn(index: number, item: Columns) {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, tap} from 'rxjs';
-import {BtnActions, KanbanNames} from "./store/actions";
+import {BtnActions, KanbanActions, KanbanNames} from "./store/actions";
 import {Btn} from "./store/reducerBtn";
 import {ListNameService} from "./services/list-name.service";
 
@@ -35,6 +35,10 @@ export class AppEffects {
       dispatch: false
     }
   )
-
-
+//TODO :write type for action
+  changeActiveName$ = createEffect(() => this.actions$.pipe(
+    ofType(KanbanNames.ActiveBtn),
+    map((el: any) => el.item.name.trim()),
+    map((name) => KanbanActions.changeActiveListName({name}))
+  ))
 }

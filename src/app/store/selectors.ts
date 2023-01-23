@@ -1,38 +1,45 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {Boards} from "../../assets/data/model";
 import {Btn} from "./reducerBtn";
+import {IKanban} from "./reducerList";
 
 
 export namespace KanbanSelectors {
 
-  export const kanban = createFeatureSelector<Boards[]>('kanban');
+  export const kanban = createFeatureSelector<IKanban>('kanban');
 
   export const allTasks = createSelector(
     kanban,
     (state) => state)
 
-  export const getContentList = (name: string = '') => createSelector(
+  export const getActiveList = createSelector(
     kanban,
-    state => {
-      if (!!name) {
-        return [...state].filter(el => el.name === name).map(el => el.columns)[0]
-      } else
-        return [...state][0].columns
-    }
+    state => ({
+      ...state
+      //return state.boards.map(el=>el.)
+    })
+  )
+
+  export const getActualList = createSelector(
+    kanban,
+    state => [...state.boards].filter(board => board.name === state.activeListName)[0].columns
   )
 
   export const countColumns = createSelector(
     kanban,
-    state => state.length
+    state => state
   )
 
-  export const getColumnStatusById = (id: number) => createSelector(
+  export const getColumnStatusById = createSelector(
     kanban,
-    BtnSelectors.activeName,
-    (state, name) => [...state].filter(b => b.name === name)
-      .map(el => el.columns.map(a => a.name))[0]
+    (state) => [...state.boards].filter(board => board.name === state.activeListName)
+      .map(column => column.columns.map(el => el.name))[0]
   )
 
+  export const getStatusIdAfterChange = (status: string) => createSelector(
+    kanban,
+    (state) => [...state.boards].filter(board => board.name === state.activeListName)[0]
+      .columns.filter(column => column.name === status)[0].id
+  )
 
 //  export const actual
 

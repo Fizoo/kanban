@@ -19,6 +19,9 @@ export class EditTaskDialogComponent implements OnInit {
   form: FormGroup;
   columnStatus$: Observable<string[]>;
 
+  newStatusId: number = this.data.statusId
+  oldStatus = this.data.status
+
   constructor(public dialogRef: MatDialogRef<EditTaskDialogComponent>,
               @Inject(DIALOG_DATA) public data: Tasks,
               private store: Store,
@@ -33,8 +36,17 @@ export class EditTaskDialogComponent implements OnInit {
       subtasks: this.formBuilder.array([...this.data.subtasks.map((el) => this.addSkillFormGroup(el))]),
     })
 
-    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById(this.data.statusId))
+    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById)
 
+    /* this.status?.valueChanges.pipe(
+       tap(el => console.log('tap', el)),
+       map(el => this.store.dispatch(KanbanActions.moveTaskByStatus({
+         task: this.data,
+         newStatus: el,
+         oldStatus: this.oldStatus
+       })))
+       // switchMap(el => this.store.select(KanbanSelectors.getStatusIdAfterChange(el)))
+     ).subscribe()*/
   }
 
   addSkillFormGroup(el?: Subtask): FormGroup {
@@ -45,14 +57,23 @@ export class EditTaskDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value)
-    //TODO : change statusId with change status
+
     let task: Tasks = {
       ...this.form.value,
       id: this.data.id,
-      statusId: this.data.statusId
+      statusId: this.newStatusId
     }
+
     this.store.dispatch(KanbanActions.editTask({task}))
+
+    if (this.status?.value !== this.oldStatus) {
+      this.store.dispatch(KanbanActions.moveTaskByStatus({
+        task: task,
+        newStatus: this.status?.value,
+        oldStatus: this.oldStatus
+      }))
+    }
+
     this.dialogRef.close()
   }
 
@@ -63,7 +84,6 @@ export class EditTaskDialogComponent implements OnInit {
   addSub() {
     this.subtasks.push(this.addSkillFormGroup())
   }
-
 
   get status() {
     return this.form.get('status');

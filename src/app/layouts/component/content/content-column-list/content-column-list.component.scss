@@ -16,6 +16,12 @@
       outline-width: 2px;
       border-radius: 6px;
       width: 17.5rem;
+      @media screen and (max-width: 1024px) {
+        max-width: 8rem;
+      }
+      @media screen and (max-width: 600px) {
+        max-width: 4rem;
+      }
     }
   }
 }
