@@ -13,6 +13,7 @@ export enum KanbanNames {
   SaveLocalStorage = '[Kanban] saveLocalStorage',
   GetWithLocalStorage = '[Kanban] getWithLocalStorage',
   AddBoard = '[Kanban] addBoard',
+  AddColumns = '[Kanban] addColumns',
   ChangeContentList = '[Kanban] changeContentList',
   EditTask = '[Kanban] editTask',
   MoveTaskByStatus = '[Kanban] moveTaskByStatus',
@@ -56,7 +57,9 @@ export namespace KanbanActions {
 
   export const transferArrayItem = createAction(KanbanNames.TransferArrayItem, props<{ previousContainer: number, container: number, previousIndex: number, currentIndex: number }>())
 
-  export const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
+  export const addColumn = createAction(KanbanNames.AddColumns, props<{ column: Columns }>())
+
+  const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
 
   export const saveLocalStorage = createAction(KanbanNames.SaveLocalStorage, props<{ list: Boards }>())
 
@@ -75,5 +78,6 @@ export namespace BtnActions {
 
   export const activeBtn = createAction(KanbanNames.ActiveBtn, props<{ item: Btn }>())
 
-
 }
+
+export type KanbanActionsType = typeof KanbanActions.addBoard

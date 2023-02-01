@@ -38,15 +38,6 @@ export class EditTaskDialogComponent implements OnInit {
 
     this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById)
 
-    /* this.status?.valueChanges.pipe(
-       tap(el => console.log('tap', el)),
-       map(el => this.store.dispatch(KanbanActions.moveTaskByStatus({
-         task: this.data,
-         newStatus: el,
-         oldStatus: this.oldStatus
-       })))
-       // switchMap(el => this.store.select(KanbanSelectors.getStatusIdAfterChange(el)))
-     ).subscribe()*/
   }
 
   addSkillFormGroup(el?: Subtask): FormGroup {

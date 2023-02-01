@@ -5,19 +5,21 @@
   width: 500px;
 
 
-  h1{
+  h1 {
     color: var(--color-text);
     text-align: center;
   }
-  .input-column{
+
+  .input-column {
     width: 100%;
     display: flex;
 
 
-    .form-field{
+    .form-field {
       width: 100%;
     }
-    .btn-closed{
+
+    .btn-closed {
       color: #e3e1e1;
       height: 100%;
       margin-top: 5px;
@@ -25,14 +27,14 @@
 
   }
 
-  .form-field{
+  .form-field {
     width: 100%;
   }
 
-  .actions{
+  .actions {
     width: 100%;
 
-    .btnForm{
+    .btnForm {
       width: 100%;
       margin-bottom: 1rem;
       padding: 0;
@@ -40,5 +42,8 @@
   }
 }
 
+.mat-mdc-menu-item .mdc-list-item__primary-text {
+  //color: white;
+}
 
 

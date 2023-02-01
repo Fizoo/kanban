@@ -25,6 +25,20 @@ export class AppEffects {
       }
     )
   ))
+  /*    addBtn1$ = createEffect(() =>
+        this.actions$.pipe(
+          ofType(KanbanNames.AddBoard),
+          map((action: KanbanActionsType) => action.board),
+          map(({board: {name}}) => BtnActions.addBtn({
+            item: {
+              name,
+              id: new Date().getTime(),
+              class: 'SideNav__tab'
+            }
+          }))
+        )
+      );*/
+
 
   activeLinkBtn$ = createEffect(() => this.actions$.pipe(
       ofType(KanbanNames.ActiveBtn),
@@ -41,4 +55,39 @@ export class AppEffects {
     map((el: any) => el.item.name.trim()),
     map((name) => KanbanActions.changeActiveListName({name}))
   ))
+
+  /* changeActiveName1$ = createEffect(() =>
+     this.actions$.pipe(
+       ofType(KanbanNames.ActiveBtn),
+       map(({item: {name}}) => {
+         if (typeof name === 'string') {
+           name = name.trim()
+         }
+         return KanbanActions.changeActiveListName({name})
+       }))
+   )
+ );*/
+
 }
+
+/*
+changeActiveName$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(KanbanNames.ActiveBtn),
+    map(({item}) => KanbanActions.changeActiveListName({ name: item.name.trim() }))
+  )
+);*/
+
+/*
+addBtn$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(KanbanNames.AddBoard),
+    map(({board}) => BtnActions.addBtn({
+      item: {
+        name: board.name,
+        id: new Date().getTime(),
+        class: 'SideNav__tab'
+      }
+    }))
+  )
+);*/

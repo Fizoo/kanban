@@ -23,7 +23,6 @@ export class SubModalComponent implements OnInit {
   columnStatus$: Observable<string[]>
   actualList: string
   actualColumns: string = ''
-  isChanged = false
   oldDate: Tasks
   subAll: number
   subTrue: number
@@ -77,9 +76,6 @@ export class SubModalComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  compareObjects(o1: any, o2: any): boolean {
-    return o1.name === o2.name && o1.id === o2.id;
-  }
 
   move({value}: MatSelectChange) {
     let oldStatus = this.data.status

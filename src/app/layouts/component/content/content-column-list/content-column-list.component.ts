@@ -3,6 +3,8 @@ import {CdkDragDrop} from "@angular/cdk/drag-drop";
 import {Columns, Tasks} from "../../../../../assets/data/model";
 import {Store} from '@ngrx/store';
 import {KanbanActions} from "../../../../store/actions";
+import {Observable} from "rxjs";
+import {KanbanSelectors} from "../../../../store/selectors";
 
 @Component({
   selector: 'app-content-column-list',
@@ -13,19 +15,18 @@ import {KanbanActions} from "../../../../store/actions";
 export class ContentColumnListComponent implements OnInit {
 
   @Input() item: Columns
-
-  @Input()
-  index: number
+  @Input() index: number
 
   isEmptyColumn: boolean;
+  count: Observable<number>
 
   constructor(private store: Store) {
-
   }
 
 
   ngOnInit(): void {
     this.isEmptyColumn = this.item.tasks.length === 0;
+    this.count = this.store.select(KanbanSelectors.countOfStatus(this.item))
   }
 
   isEmptyColumnFn(item: Columns): boolean {
@@ -57,6 +58,7 @@ export class ContentColumnListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );*/
+
     }
   }
 }

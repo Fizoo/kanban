@@ -62,6 +62,7 @@ import {CheckedDirective} from './directives/checked.directive';
 import {
   EditTaskDialogComponent
 } from './layouts/component/content/content-column-list/content-tasks/sub-modal/edit-task-dialog/edit-task-dialog.component';
+import { AddTaskDialogComponent } from './layouts/component/header/action-form/add-task-dialog/add-task-dialog.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import {
     SubModalComponent,
     CheckedDirective,
     EditTaskDialogComponent,
+    AddTaskDialogComponent,
   ],
   imports: [
     BrowserModule,

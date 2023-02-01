@@ -1,6 +1,7 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {Btn} from "./reducerBtn";
 import {IKanban} from "./reducerList";
+import {Columns} from "../../assets/data/model";
 
 
 export namespace KanbanSelectors {
@@ -10,6 +11,18 @@ export namespace KanbanSelectors {
   export const allTasks = createSelector(
     kanban,
     (state) => state)
+
+  export const countOfStatus = (item: Columns) => createSelector(
+    kanban,
+    state => {
+      const {boards, activeListName} = state;
+      const activeBoard = boards.find(board => board.name === activeListName);
+      if (!activeBoard) return 0;
+      const activeList = activeBoard.columns.find(column => column.name === item.name);
+
+      return activeList ? activeList.tasks.length : 0
+    }
+  )
 
   export const getActiveList = createSelector(
     kanban,
@@ -39,6 +52,17 @@ export namespace KanbanSelectors {
     kanban,
     (state) => [...state.boards].filter(board => board.name === state.activeListName)[0]
       .columns.filter(column => column.name === status)[0].id
+  )
+
+  export const getAllStatusOfColumns = createSelector(
+    kanban,
+    state => {
+      let newBoard = [...state.boards].find(board => board.name === state.activeListName);
+      if (!!newBoard) {
+        return newBoard.columns.map(el => ({status: el.name, id: el.id}))
+      }
+      return []
+    }
   )
 
 //  export const actual

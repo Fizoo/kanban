@@ -1,0 +1,77 @@
+<form [formGroup]="form" class="form" (ngSubmit)="submit($event)">
+  <h1 class="h1" mat-dialog-title>Edit Task</h1>
+
+  <div class="content" mat-dialog-content>
+
+    <mat-form-field class="Title">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title"
+             formControlName="title">
+      <mat-error *ngIf="title.invalid">Title is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="Description">
+      <mat-label>Description</mat-label>
+      <textarea matInput placeholder="Description"
+                formControlName="description"
+      ></textarea>
+    </mat-form-field>
+
+    <p> Subtasks
+    </p>
+    <div
+      class="input-column"
+      formArrayName="subtasks"
+      *ngFor="let itemControl of subtasks.controls; index as i">
+
+      <mat-form-field [formGroupName]="i" class="form-field">
+        <input matInput type="text" formControlName="sub">
+        <mat-error>Title is required</mat-error>
+      </mat-form-field>
+
+      <button
+        class="btn-closed"
+        matSuffix
+        mat-icon-button
+        (click)="deleteSub(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <button color="accent" mat-raised-button (click)="addSub()">
+      <mat-icon>add</mat-icon>
+      Add New Subtask
+    </button>
+
+    <p>Status</p>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Column</mat-label>
+        <mat-select
+          formControlName="status"
+          panelClass="panel">
+          <mat-option
+            *ngFor="let value of statusList | async "
+            [value]="value"
+          >
+            {{value.status}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button
+      class="submit"
+      type="submit"
+      color="primary"
+      mat-raised-button
+      [disabled]="this.form.invalid"
+    >Create Task
+    </button>
+
+  </div>
+
+
+</form>

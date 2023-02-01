@@ -165,4 +165,25 @@ export const listReducer = createReducer(
       })
     })
   ),
+  /*on(KanbanActions.transferArrayItem2,
+    (state, {previousContainerId, containerId, previousIndex, currentIndex}) => {
+      const {boards, activeListName} = state;
+      const activeBoard = boards.find(board => board.name === activeListName);
+      if (!activeBoard) return state;
+
+      const previousContainer = activeBoard.columns.find(column => column.id === previousContainerId);
+      const container = activeBoard.columns.find(column => column.id === containerId);
+
+      const deletedTask = previousContainer.tasks.splice(previousIndex, 1)[0];
+      container.tasks.splice(currentIndex, 0, {
+        ...deletedTask,
+        statusId: container.id,
+        status: container.name
+      });
+
+      return {
+        ...state,
+        boards: [...boards]
+      }
+    }),*/
 )
