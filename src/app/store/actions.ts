@@ -2,6 +2,12 @@ import {createAction, props} from "@ngrx/store";
 import {Boards, Columns, Subtask, Tasks} from "../../assets/data/model";
 import {Btn} from "./reducerBtn";
 
+
+interface IColumn {
+  column: string
+  id: number
+}
+
 export enum KanbanNames {
 
   //Task,Column actions
@@ -57,7 +63,7 @@ export namespace KanbanActions {
 
   export const transferArrayItem = createAction(KanbanNames.TransferArrayItem, props<{ previousContainer: number, container: number, previousIndex: number, currentIndex: number }>())
 
-  export const addColumn = createAction(KanbanNames.AddColumns, props<{ column: Columns }>())
+  export const addColumn = createAction(KanbanNames.AddColumns, props<{ column: IColumn[] }>())
 
   const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
 

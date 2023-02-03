@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {AddNewColumnDialogComponent} from "./add-new-column-dialog/add-new-column-dialog.component";
 
 @Component({
   selector: 'app-column-create',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class ColumnCreateComponent {
 
+
+  constructor(private dialog: MatDialog) {
+  }
+
+
+  addNewColumn() {
+    this.dialog.open(AddNewColumnDialogComponent)
+  }
 }

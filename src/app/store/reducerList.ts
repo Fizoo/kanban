@@ -83,6 +83,34 @@ export const listReducer = createReducer(
       } : board)
     })
   ),
+  on(KanbanActions.addColumn,
+    (state, {column}) => ({
+      ...state,
+      boards: [...state.boards].map(board => {
+        if (board.name === state.activeListName) {
+          let oldColumn = column.filter(el => board.columns.map(a => a.id).includes(el.id));
+          let newColumn = column.filter(el => !board.columns.map(a => a.id).includes(el.id));
+
+          let changedColumns = board.columns.map(c => {
+            let temp = oldColumn.find(a => a.id === c.id);
+            return temp && temp.column !== c.name ? {...c, name: temp.column} : c;
+          });
+
+          let newColumns = newColumn.map(a => ({
+            tasks: [],
+            name: a.column,
+            id: a.id
+          }))
+
+          return ({
+            ...board,
+            columns: [...changedColumns, ...newColumns]
+          })
+        } else
+          return board
+      })
+    })
+  ),
 
   on(KanbanActions.moveTaskByStatus,
     (state, {task, newStatus, oldStatus}) => ({
