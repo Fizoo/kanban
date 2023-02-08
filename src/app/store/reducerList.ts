@@ -2,6 +2,7 @@ import {createReducer, on} from "@ngrx/store";
 import {Boards, Tasks} from "../../assets/data/model";
 import {Kanban} from "../../assets/data/data";
 import {KanbanActions} from "./actions";
+import {LOCAL_STORAGE_KEY} from "../services/local-storage.service";
 
 export interface IKanban {
   boards: Boards[]
@@ -15,6 +16,14 @@ const initialState: IKanban = {
 
 export const listReducer = createReducer(
   initialState,
+  on(KanbanActions.initial,
+    (state) => {
+      const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+      //const data = null
+      return data ? JSON.parse(data) : state
+
+    }
+  ),
   on(KanbanActions.addBoard,
     (state, {board}) => ({
       ...state,
@@ -193,25 +202,15 @@ export const listReducer = createReducer(
       })
     })
   ),
-  /*on(KanbanActions.transferArrayItem2,
-    (state, {previousContainerId, containerId, previousIndex, currentIndex}) => {
-      const {boards, activeListName} = state;
-      const activeBoard = boards.find(board => board.name === activeListName);
-      if (!activeBoard) return state;
 
-      const previousContainer = activeBoard.columns.find(column => column.id === previousContainerId);
-      const container = activeBoard.columns.find(column => column.id === containerId);
-
-      const deletedTask = previousContainer.tasks.splice(previousIndex, 1)[0];
-      container.tasks.splice(currentIndex, 0, {
-        ...deletedTask,
-        statusId: container.id,
-        status: container.name
-      });
-
-      return {
+  /*on(KanbanActions.deleteBoard,
+    (state) => {
+      const nameBoard = state.activeListName
+      return ({
         ...state,
-        boards: [...boards]
-      }
-    }),*/
+        boards: [...state.boards].filter(b => b.name !== nameBoard),
+        activeListName: state.boards[0].name
+      })
+    }
+  )*/
 )

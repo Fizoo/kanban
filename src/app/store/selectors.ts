@@ -8,7 +8,7 @@ export namespace KanbanSelectors {
 
   export const kanban = createFeatureSelector<IKanban>('kanban');
 
-  export const allTasks = createSelector(
+  export const allState = createSelector(
     kanban,
     (state) => state)
 
@@ -37,10 +37,6 @@ export namespace KanbanSelectors {
     state => [...state.boards].filter(board => board.name === state.activeListName)[0].columns
   )
 
-  export const countColumns = createSelector(
-    kanban,
-    state => state
-  )
 
   export const getColumnStatusById = createSelector(
     kanban,
@@ -63,6 +59,35 @@ export namespace KanbanSelectors {
       }
       return []
     }
+  )
+
+  export const getBtnList = createSelector(
+    kanban,
+    state => {
+      return [...state.boards].map((el) => {
+        if (state.activeListName === el.name) {
+          return ({
+            name: el.name,
+            id: el.id,
+            class: 'SideNav__tab SideNav__tab--active'
+          })
+        } else return ({
+          name: el.name,
+          id: el.id,
+          class: 'SideNav__tab'
+        })
+      })
+    }
+  )
+
+  export const getBtnListCount = createSelector(
+    kanban,
+    state => [...state.boards].length
+  )
+
+  export const titleName = createSelector(
+    kanban,
+    state => state.activeListName
   )
 
 //  export const actual

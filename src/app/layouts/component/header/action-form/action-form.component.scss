@@ -52,7 +52,36 @@
   font-weight: bold;
   transition: all .2s ease;
 
-  &:hover:not(&--theme, &--custom){
+  &:hover:not(&--theme, &--custom) {
     background: var(--lightBlue);
   }
+}
+
+.mdc-menu-surface--open {
+  background: var(--darkGray);
+}
+
+.mdc-list-item__primary-text {
+  color: var(--color-text);
+}
+
+.mat-mdc-menu-item {
+  .mat-icon-no-color {
+    color: var(--color-text);
+  }
+
+  &:last-child {
+    .mat-icon-no-color {
+      color: red;
+    }
+
+    .mdc-list-item__primary-text {
+      color: red;
+    }
+  }
+
+  &:hover {
+    opacity: 0.5;
+  }
+
 }

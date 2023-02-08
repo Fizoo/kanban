@@ -1,16 +1,52 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, tap} from 'rxjs';
+import {map, switchMap, tap} from 'rxjs';
 import {BtnActions, KanbanActions, KanbanNames} from "./store/actions";
 import {Btn} from "./store/reducerBtn";
 import {ListNameService} from "./services/list-name.service";
+import {LOCAL_STORAGE_KEY, LocalStorageService} from "./services/local-storage.service";
+import {Store} from "@ngrx/store";
+import {KanbanSelectors} from "./store/selectors";
 
 
 @Injectable()
 export class AppEffects {
   constructor(private actions$: Actions,
-              private listName: ListNameService) {
+              private listName: ListNameService,
+              private localStorage: LocalStorageService,
+              private store: Store
+  ) {
   }
+
+  /* initialState$ = createEffect(() => this.actions$.pipe(
+       ofType(KanbanNames.InitialState),
+       switchMap(() => this.localStorage.getItem(LOCAL_STORAGE_KEY)),
+       tap(el => console.log('el', el))
+     ),
+     {dispatch: false})*/
+
+  changeLocalStorage$ = createEffect(() => this.actions$.pipe(
+      ofType(KanbanNames.AddBoard,
+        KanbanNames.ChangeContentList,
+        KanbanNames.MoveTask,
+        KanbanNames.EditTask,
+        KanbanNames.AddTask,
+        KanbanNames.DeleteTask,
+        KanbanNames.MoveItemInArray,
+        KanbanNames.TransferArrayItem,
+        KanbanNames.AddColumns,
+        KanbanNames.ChangeTaskSubtaskCheck,
+        KanbanNames.ChangeActiveListName
+      ),
+      switchMap(() => this.store.select(KanbanSelectors.allState)),
+      tap(data => {
+        console.log('effect', data)
+        this.localStorage.set(LOCAL_STORAGE_KEY, data)
+      })
+    ),
+    {dispatch: false}
+  )
+
 
   addBtn$ = createEffect(() => this.actions$.pipe(
     ofType(KanbanNames.AddBoard),

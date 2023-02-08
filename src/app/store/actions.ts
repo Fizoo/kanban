@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {Boards, Columns, Subtask, Tasks} from "../../assets/data/model";
+import {Boards, Columns, Tasks} from "../../assets/data/model";
 import {Btn} from "./reducerBtn";
 
 
@@ -9,15 +9,12 @@ interface IColumn {
 }
 
 export enum KanbanNames {
-
   //Task,Column actions
+  InitialState = '[Kanban] InitialState',
   GetAll = '[Kanban] Get All',
   MoveTask = '[Kanban] move',
   DeleteTask = '[Kanban] delete',
   AddTask = '[Kanban] addTask',
-  CheckSubTask = '[Kanban] checkSubTask',
-  SaveLocalStorage = '[Kanban] saveLocalStorage',
-  GetWithLocalStorage = '[Kanban] getWithLocalStorage',
   AddBoard = '[Kanban] addBoard',
   AddColumns = '[Kanban] addColumns',
   ChangeContentList = '[Kanban] changeContentList',
@@ -27,6 +24,8 @@ export enum KanbanNames {
   ChangeActiveListName = '[Kanban] changeActiveListName',
   MoveItemInArray = '[Kanban] moveItemInArray',
   TransferArrayItem = '[Kanban] transferArrayItem',
+  EditBoard = '[Kanban] editBoard',
+  DeleteBoard = '[Kanban] deleteBoard',
 
   //UI actions
   GetUI = '[UI] getUI',
@@ -42,6 +41,8 @@ export enum KanbanNames {
 }
 
 export namespace KanbanActions {
+
+  export const initial = createAction(KanbanNames.InitialState)
 
   export const getAll = createAction(KanbanNames.GetAll);
 
@@ -65,11 +66,9 @@ export namespace KanbanActions {
 
   export const addColumn = createAction(KanbanNames.AddColumns, props<{ column: IColumn[] }>())
 
-  const checkSubTask = createAction(KanbanNames.CheckSubTask, props<{ subTask: Subtask }>())
+  export const editBoard = createAction(KanbanNames.EditBoard)
 
-  export const saveLocalStorage = createAction(KanbanNames.SaveLocalStorage, props<{ list: Boards }>())
-
-  export const getWithLocalStorage = createAction(KanbanNames.GetWithLocalStorage, props<{ list: Boards }>())
+  export const deleteBoard = createAction(KanbanNames.DeleteBoard)
 
   export const changeTaskSubtaskCheck = createAction(KanbanNames.ChangeTaskSubtaskCheck, props<{ task: Tasks }>())
 
@@ -78,12 +77,12 @@ export namespace KanbanActions {
 }
 
 export namespace BtnActions {
+
+
   export const getAll = createAction(KanbanNames.GetBtn);
 
   export const addBtn = createAction(KanbanNames.AddBtn, props<{ item: Btn }>())
 
-  export const activeBtn = createAction(KanbanNames.ActiveBtn, props<{ item: Btn }>())
-
 }
 
-export type KanbanActionsType = typeof KanbanActions.addBoard
+

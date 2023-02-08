@@ -4,27 +4,26 @@
   padding: 1rem;
   width: 500px;
 
-
   h1 {
     color: var(--color-text);
     text-align: center;
   }
 
-  .input-column {
+  .column-title {
+    color: var(--color-text);
+    margin-left: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .columns {
     width: 100%;
     display: flex;
+    margin-bottom: 0.5rem;
+  }
 
-
-    .form-field {
-      width: 100%;
-    }
-
-    .btn-closed {
-      color: #e3e1e1;
-      height: 100%;
-      margin-top: 5px;
-    }
-
+  .addColumn {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 
   .form-field {
@@ -33,17 +32,33 @@
 
   .actions {
     width: 100%;
+    padding: 0;
 
     .btnForm {
       width: 100%;
-      margin-bottom: 1rem;
-      padding: 0;
     }
   }
 }
 
-.mat-mdc-menu-item .mdc-list-item__primary-text {
-  //color: white;
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background-color: var(--bg-main);
+  color: var(--color-text);
+
+  .mdc-floating-label {
+    color: white;
+  }
 }
 
+//h1
+.mat-mdc-dialog-container {
+  .mdc-dialog__title {
+    color: var(--color-text);
+  }
+}
 
+//input color text
+.mdc-text-field:not(.mdc-text-field--disabled) {
+  .mdc-text-field__input {
+    color: var(--color-text);
+  }
+}

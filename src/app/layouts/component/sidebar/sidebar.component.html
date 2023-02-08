@@ -3,6 +3,7 @@
 
   <app-sidebar-action
     [listMenu]="listButton$ | async "
+    (changeList)="changeList($event)"
 
   ></app-sidebar-action>
 

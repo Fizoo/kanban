@@ -1,53 +1,59 @@
-<div class="form">
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
 
   <h1 mat-dialog-title>Add New Board</h1>
 
   <div mat-dialog-content>
     <mat-form-field class="form-field">
       <mat-label>Name</mat-label>
-      <input matInput type="text" [(ngModel)]="name">
-      <button *ngIf="name" matSuffix mat-icon-button aria-label="Clear" (click)="name=''">
+      <input formControlName="name" matInput type="text">
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetName()">
         <mat-icon>close</mat-icon>
       </button>
-
+      <mat-error>Name is required</mat-error>
     </mat-form-field>
 
-    <div class="input-column" *ngFor="let item of columnsArr; index as i">
-      <mat-form-field class="form-field">
+    <div class="column-title">Columns</div>
+
+    <div class="columns" formArrayName="columns" *ngFor="let item of columns.controls; index as i">
+      <mat-form-field [formGroupName]="i" class="form-field">
         <mat-label>Column</mat-label>
-        <input matInput type="text" [(ngModel)]="item.column">
-        <button *ngIf="item.column" matSuffix mat-icon-button aria-label="Clear" (click)="item.column=''">
+        <input formControlName="column" matInput type="text">
+        <mat-error>Name is required</mat-error>
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="resetColumn(i)">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
 
-      <button *ngIf="columnsArr.length>1"
-              class="btn-closed"
-              matSuffix
-              mat-icon-button
-              (click)="deleteColumn(i)"
-      >
+      <button
+        class="btn-closed"
+        matSuffix
+        mat-icon-button
+        (click)="delete(i)">
         <mat-icon>close</mat-icon>
       </button>
     </div>
 
-    <div class="actions" mat-dialog-actions>
-
-      <button class="btnForm"
+    <div>
+      <button class="addColumn"
               mat-raised-button
+              color="accent"
               (click)="addColumns()"
       >+ Add New Column
       </button>
+    </div>
 
+    <div class="actions" mat-dialog-actions>
       <button
-        [disabled]="!name"
+        type="submit"
         class="btnForm" mat-raised-button
-        (click)="closed()"
-        color="primary">Create New Board
+        [disabled]="form.invalid"
+        color="primary">
+        Create New Board
       </button>
     </div>
+
   </div>
-</div>
+</form>
 
 
 

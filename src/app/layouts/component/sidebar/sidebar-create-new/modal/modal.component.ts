@@ -1,55 +1,64 @@
-import {Component} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
 import {Store} from "@ngrx/store";
-import {KanbanActions} from "../../../../../store/actions";
-import {Boards, Columns} from "../../../../../../assets/data/model";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-interface Column {
-  column: string
-}
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ModalComponent {
+export class ModalComponent implements OnInit {
+  form: FormGroup;
 
-  columnsArr: Column[] = [{
-    column: ''
-  }]
-  name = ''
-
-  constructor(private store: Store,
+  constructor(private fb: FormBuilder,
+              private store: Store,
               public dialogRef: MatDialogRef<ModalComponent>) {
   }
 
-  addColumns() {
-    this.columnsArr.push({column: ''})
-  }
-
-  deleteColumn(i: number) {
-    this.columnsArr = this.columnsArr.filter((el, index) => index !== i)
-  }
-
-  closed() {
-    let columns: Columns[] = this.columnsArr.map((el) => {
-      return {
-        name: el.column,
-        id: new Date().getTime(),
-        tasks: []
-      }
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      columns: this.fb.array([this.addFbGroup()])
     })
+  }
 
-    let board: Boards = {
-      name: this.name,
-      id: new Date().getTime(),
-      columns
-    }
+  addColumns() {
+    this.columns.push(this.addFbGroup())
+  }
 
-    this.store.dispatch(KanbanActions.addBoard({board}))
+  addFbGroup() {
+    return this.fb.group({
+      column: ['', Validators.required]
+    })
+  }
 
-    this.dialogRef.close()
+  onSubmit() {
+    console.log(this.form.value)
+    console.log('ggg')
+  }
+
+  delete(i: number) {
+    this.columns.removeAt(i)
+  }
+
+  resetName() {
+    this.name.reset()
+  }
+
+  resetColumn(i: number) {
+    this.columns.controls[i].reset()
+  }
+
+  get name() {
+    return this.form.controls['name']
+  }
+
+  get columns() {
+    return (this.form.controls['columns'] as FormArray)
   }
 }

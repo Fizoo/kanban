@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {DarkModeService} from 'src/app/services/dark-mode.service';
 import {Observable} from "rxjs";
 import {HideAsideService} from "../../services/hide-aside.service";
+import {Store} from "@ngrx/store";
+import {KanbanActions} from "../../store/actions";
 
 @Component({
   selector: 'app-main-layout',
@@ -9,16 +11,20 @@ import {HideAsideService} from "../../services/hide-aside.service";
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-  darkMode:boolean
-  isHide:Observable<boolean>
+  darkMode: boolean
+  isHide: Observable<boolean>
 
-  constructor(private mode:DarkModeService,
-              private hideService:HideAsideService,
-              ) { }
+  constructor(private mode: DarkModeService,
+              private hideService: HideAsideService,
+              private store: Store
+  ) {
+  }
 
   ngOnInit(): void {
-    this.mode.darkMode$.subscribe(el=>this.darkMode=el)
-    this.isHide=this.hideService.hide$
+    this.store.dispatch(KanbanActions.initial())
+
+    this.mode.darkMode$.subscribe(el => this.darkMode = el)
+    this.isHide = this.hideService.hide$
   }
 
   hideAside() {

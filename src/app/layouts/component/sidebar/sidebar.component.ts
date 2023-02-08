@@ -4,7 +4,8 @@ import {Observable} from "rxjs";
 import {HideAsideService} from "../../../services/hide-aside.service";
 import {Btn} from "../../../store/reducerBtn";
 import {Store} from '@ngrx/store';
-import {BtnSelectors} from "../../../store/selectors";
+import {KanbanSelectors} from "../../../store/selectors";
+import {KanbanActions} from "../../../store/actions";
 
 @Component({
   selector: 'app-sidebar',
@@ -26,8 +27,8 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.mode$ = this.darkService.darkMode$
-    this.listButton$ = this.store.select(BtnSelectors.getBtn)
-    this.btnCount$ = this.store.select(BtnSelectors.btnCount)
+    this.listButton$ = this.store.select(KanbanSelectors.getBtnList)
+    this.btnCount$ = this.store.select(KanbanSelectors.getBtnListCount)
   }
 
   toggleMode() {
@@ -36,6 +37,10 @@ export class SidebarComponent implements OnInit {
 
   changeVisible() {
     this.hideService.changeHide()
+  }
+
+  changeList(item: Btn) {
+    this.store.dispatch(KanbanActions.changeActiveListName({name: item.name}))
   }
 
 }
