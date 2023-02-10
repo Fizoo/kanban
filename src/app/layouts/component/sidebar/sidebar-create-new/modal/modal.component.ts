@@ -2,6 +2,8 @@ import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@an
 import {MatDialogRef} from "@angular/material/dialog";
 import {Store} from "@ngrx/store";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Boards} from "../../../../../../assets/data/model";
+import {KanbanActions} from "../../../../../store/actions";
 
 
 @Component({
@@ -38,8 +40,19 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value)
-    console.log('ggg')
+    if (this.form.valid) {
+      let board: Boards = {
+        id: new Date().getTime(),
+        name: this.form.value.name,
+        columns: [...this.columns.value].map(el => ({
+          name: el.column,
+          id: new Date().getTime(),
+          tasks: []
+        }))
+      }
+      this.store.dispatch(KanbanActions.addBoard({board}))
+    }
+    this.dialogRef.close()
   }
 
   delete(i: number) {

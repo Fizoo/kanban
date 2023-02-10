@@ -51,7 +51,7 @@ export class SubModalComponent implements OnInit {
   }
 
   select(item: Tasks) {
-    console.log(item)
+    //console.log(item)
   }
 
   onChange(change: MatSelectionListChange) {

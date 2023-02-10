@@ -27,3 +27,8 @@ export interface Boards {
 export interface Root {
   boards: Boards[];
 }
+
+export interface EditBoard {
+  name: string
+  columns: Array<{ column: string, id: number }>
+}

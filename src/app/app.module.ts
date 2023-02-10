@@ -64,6 +64,7 @@ import {
 } from './layouts/component/content/content-column-list/content-tasks/sub-modal/edit-task-dialog/edit-task-dialog.component';
 import { AddTaskDialogComponent } from './layouts/component/header/action-form/add-task-dialog/add-task-dialog.component';
 import { AddNewColumnDialogComponent } from './layouts/component/content/column-create/add-new-column-dialog/add-new-column-dialog.component';
+import { EditBoardDialogComponent } from './layouts/component/header/action-form/edit-board-dialog/edit-board-dialog.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import { AddNewColumnDialogComponent } from './layouts/component/content/column-
     EditTaskDialogComponent,
     AddTaskDialogComponent,
     AddNewColumnDialogComponent,
+    EditBoardDialogComponent,
   ],
   imports: [
     BrowserModule,

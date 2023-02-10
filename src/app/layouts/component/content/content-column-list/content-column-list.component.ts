@@ -44,8 +44,6 @@ export class ContentColumnListComponent implements OnInit {
 
       //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log('!===event', event)
-      console.log('!===item', this.item)
       this.store.dispatch(KanbanActions.transferArrayItem({
         previousContainer: event.previousContainer.data[0].statusId,
         container: this.item.id,

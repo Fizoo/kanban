@@ -27,6 +27,7 @@ export class AppEffects {
 
   changeLocalStorage$ = createEffect(() => this.actions$.pipe(
       ofType(KanbanNames.AddBoard,
+        KanbanNames.EditBoard,
         KanbanNames.ChangeContentList,
         KanbanNames.MoveTask,
         KanbanNames.EditTask,
@@ -38,9 +39,10 @@ export class AppEffects {
         KanbanNames.ChangeTaskSubtaskCheck,
         KanbanNames.ChangeActiveListName
       ),
+      tap(el => console.log('effect', el.type)),
       switchMap(() => this.store.select(KanbanSelectors.allState)),
       tap(data => {
-        console.log('effect', data)
+        // console.log('effect', data)
         this.localStorage.set(LOCAL_STORAGE_KEY, data)
       })
     ),

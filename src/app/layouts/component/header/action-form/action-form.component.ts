@@ -3,6 +3,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddTaskDialogComponent} from "./add-task-dialog/add-task-dialog.component";
 import {Store} from "@ngrx/store";
 import {KanbanActions} from "../../../../store/actions";
+import {EditBoardDialogComponent} from "./edit-board-dialog/edit-board-dialog.component";
 
 @Component({
   selector: 'app-action-form',
@@ -14,7 +15,8 @@ import {KanbanActions} from "../../../../store/actions";
 export class ActionFormComponent {
 
   constructor(public dialog: MatDialog,
-              private store: Store) {
+              private store: Store,
+  ) {
   }
 
   openDialog() {
@@ -23,5 +25,9 @@ export class ActionFormComponent {
 
   deleteBoard() {
     this.store.dispatch(KanbanActions.deleteBoard())
+  }
+
+  editDialog() {
+    this.dialog.open(EditBoardDialogComponent)
   }
 }

@@ -1,0 +1,49 @@
+<form [formGroup]="form" class="form" (ngSubmit)="onSubmit()">
+  <h1 class="h1" mat-dialog-title>Add New Column</h1>
+
+  <div class="content" mat-dialog-content>
+
+    <mat-form-field class="title">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Title" formControlName="name">
+    </mat-form-field>
+
+    <p> Columns</p>
+
+    <div
+      class="input-column"
+      formArrayName="columns"
+      *ngFor="let itemControl of columns.controls; index as i">
+
+      <mat-form-field [formGroupName]="i" class="form-field">
+        <input matInput type="text" formControlName="column" placeholder="Name for New Column">
+        <mat-error *ngIf="itemControl.invalid">Column is required</mat-error>
+      </mat-form-field>
+
+      <button
+        class="btn-closed"
+        matSuffix
+        mat-icon-button
+        [disabled]="disableColumn(i)"
+        (click)="deleteColumn(i)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <button color="accent" mat-raised-button (click)="addColumn()">
+      <mat-icon>add</mat-icon>
+      Add New Column
+    </button>
+
+    <button
+      class="save"
+      type="submit"
+      color="primary"
+      mat-raised-button
+      [disabled]="this.form.invalid"
+    >Save Change
+    </button>
+
+  </div>
+</form>

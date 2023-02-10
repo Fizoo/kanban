@@ -190,7 +190,6 @@ export const listReducer = createReducer(
                   statusId: column.id,
                   status: column.name
                 })
-                console.log('newTasks', newTasks)
                 return ({
                   ...column,
                   tasks: newTasks
@@ -203,14 +202,46 @@ export const listReducer = createReducer(
     })
   ),
 
-  /*on(KanbanActions.deleteBoard,
+  on(KanbanActions.deleteBoard,
     (state) => {
       const nameBoard = state.activeListName
+      let newActiveName = [...state.boards].filter(el => el.name !== nameBoard)[0].name
       return ({
         ...state,
         boards: [...state.boards].filter(b => b.name !== nameBoard),
-        activeListName: state.boards[0].name
+        activeListName: newActiveName
       })
     }
-  )*/
+  ),
+
+  on(KanbanActions.editBoard,
+    (state, {board}) => {
+      let newBoard: Boards = [...state.boards].filter(el => el.name === state.activeListName)[0]
+      let newActiveName: string = board.name !== state.activeListName ? board.name : state.activeListName
+
+      let newColumns = [...board.columns].filter(el => !newBoard.columns.map(a => a.id).includes(el.id))
+      let changeColumns = [...board.columns].filter(el => newBoard.columns.map(a => a.id).includes(el.id))
+
+      let boardChanged = newBoard.columns.map(c => {
+        let tempColumn = changeColumns.find(el => el.id === c.id)
+        return tempColumn && tempColumn.column !== c.name ? {...c, name: tempColumn.column} : c;
+      })
+
+      let addBoard = newColumns.map(el => ({
+        name: el.column,
+        id: el.id,
+        tasks: []
+      }))
+
+      return ({
+        ...state,
+        activeListName: newActiveName,
+        boards: [...state.boards].map(b => b.name === state.activeListName ? {
+          ...b,
+          name: newActiveName,
+          columns: [...boardChanged, ...addBoard]
+        } : b)
+      })
+    }
+  )
 )

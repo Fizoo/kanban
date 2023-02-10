@@ -1,5 +1,5 @@
 import {createAction, props} from "@ngrx/store";
-import {Boards, Columns, Tasks} from "../../assets/data/model";
+import {Boards, Columns, EditBoard, Tasks} from "../../assets/data/model";
 import {Btn} from "./reducerBtn";
 
 
@@ -66,7 +66,7 @@ export namespace KanbanActions {
 
   export const addColumn = createAction(KanbanNames.AddColumns, props<{ column: IColumn[] }>())
 
-  export const editBoard = createAction(KanbanNames.EditBoard)
+  export const editBoard = createAction(KanbanNames.EditBoard, props<{ board: EditBoard }>())
 
   export const deleteBoard = createAction(KanbanNames.DeleteBoard)
 
