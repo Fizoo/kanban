@@ -50,7 +50,6 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {EffectsModule} from '@ngrx/effects';
 import {AppEffects} from './app.effects';
-import {LogoDirective} from './directives/logo.directive';
 import {
   SubModalComponent
 } from './layouts/component/content/content-column-list/content-tasks/sub-modal/sub-modal.component';
@@ -58,13 +57,18 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
-import {CheckedDirective} from './directives/checked.directive';
 import {
   EditTaskDialogComponent
 } from './layouts/component/content/content-column-list/content-tasks/sub-modal/edit-task-dialog/edit-task-dialog.component';
-import { AddTaskDialogComponent } from './layouts/component/header/action-form/add-task-dialog/add-task-dialog.component';
-import { AddNewColumnDialogComponent } from './layouts/component/content/column-create/add-new-column-dialog/add-new-column-dialog.component';
-import { EditBoardDialogComponent } from './layouts/component/header/action-form/edit-board-dialog/edit-board-dialog.component';
+import {AddTaskDialogComponent} from './layouts/component/header/action-form/add-task-dialog/add-task-dialog.component';
+import {
+  AddNewColumnDialogComponent
+} from './layouts/component/content/column-create/add-new-column-dialog/add-new-column-dialog.component';
+import {
+  EditBoardDialogComponent
+} from './layouts/component/header/action-form/edit-board-dialog/edit-board-dialog.component';
+import {CheckedDirective} from "./directives/checked.directive";
+import { HeadMobileComponent } from './layouts/component/header/head-mobile/head-mobile.component';
 
 
 @NgModule({
@@ -92,13 +96,13 @@ import { EditBoardDialogComponent } from './layouts/component/header/action-form
     ModalWindowComponent,
     ActiveBtnDirective,
     ModalComponent,
-    LogoDirective,
     SubModalComponent,
     CheckedDirective,
     EditTaskDialogComponent,
     AddTaskDialogComponent,
     AddNewColumnDialogComponent,
     EditBoardDialogComponent,
+    HeadMobileComponent,
   ],
   imports: [
     BrowserModule,

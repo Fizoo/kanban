@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Columns} from "../../../../assets/data/model";
 import {Store} from "@ngrx/store";
@@ -8,9 +8,11 @@ import {KanbanSelectors} from "../../../store/selectors";
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
-  styleUrls: ['./content.component.scss']
+  styleUrls: ['./content.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentComponent implements OnInit {
+
   @Input()
   activeName: string
 

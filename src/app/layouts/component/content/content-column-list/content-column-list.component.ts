@@ -20,7 +20,8 @@ export class ContentColumnListComponent implements OnInit {
   isEmptyColumn: boolean;
   count: Observable<number>
 
-  constructor(private store: Store) {
+  constructor(private store: Store
+  ) {
   }
 
 

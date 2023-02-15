@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {DialogRef} from "@angular/cdk/dialog";
@@ -16,7 +16,7 @@ interface IColumn {
   templateUrl: './edit-board-dialog.component.html',
   styleUrls: ['./edit-board-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 
 export class EditBoardDialogComponent implements OnInit {
@@ -64,7 +64,7 @@ export class EditBoardDialogComponent implements OnInit {
     this.dialog.close()
   }
 
-  disableColumn(value: any): boolean {
+  disableColumn(value: number): boolean {
     return this.columnList.length > value
   }
 

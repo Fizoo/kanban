@@ -1,5 +1,4 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {Btn} from "./reducerBtn";
 import {IKanban} from "./reducerList";
 import {Columns} from "../../assets/data/model";
 
@@ -18,7 +17,7 @@ export namespace KanbanSelectors {
       const {boards, activeListName} = state;
       const activeBoard = boards.find(board => board.name === activeListName);
       if (!activeBoard) return 0;
-      const activeList = activeBoard.columns.find(column => column.name === item.name);
+      const activeList = activeBoard.columns.find(column => column.id === item.id);
 
       return activeList ? activeList.tasks.length : 0
     }
@@ -89,30 +88,5 @@ export namespace KanbanSelectors {
     kanban,
     state => state.activeListName
   )
-
-//  export const actual
-
-}
-
-export namespace BtnSelectors {
-
-  export const btn = createFeatureSelector<Btn[]>('btn')
-
-  export const getBtn = createSelector(
-    btn,
-    state => state
-  )
-  export const btnCount = createSelector(
-    btn,
-    state => state.length
-  )
-
-  export const activeName = createSelector(
-    btn,
-    state => {
-      return [...state].filter(el => el.class.includes('SideNav__tab--active'))[0].name.trim()
-    }
-  )
-
 
 }

@@ -1,8 +1,22 @@
+@use './../../../../scss/mixins' as column;
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 17.5rem));
+  grid-template-rows: 1fr;
+  @include column.tablet {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+  }
+  @include column.mobile {
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 14rem));
+  }
+}
+
 .Column {
   display: flex;
   flex-direction: column;
   margin-right: var(--margin-large);
-  max-width: 17.5rem;
+  width: 100%;
   height: 100%;
   color: var(--title);
   user-select: none;
@@ -10,18 +24,12 @@
 
   .Column__container {
     height: 90vh;
+    width: 100%;
 
     &.empty {
       outline: 1px dashed var(--mediumGrayOpacity);
       outline-width: 2px;
       border-radius: 6px;
-      width: 17.5rem;
-      @media screen and (max-width: 1024px) {
-        max-width: 8rem;
-      }
-      @media screen and (max-width: 600px) {
-        max-width: 4rem;
-      }
     }
   }
 }

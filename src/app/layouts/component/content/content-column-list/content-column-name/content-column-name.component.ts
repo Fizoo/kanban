@@ -10,7 +10,10 @@ export class ContentColumnNameComponent {
   @Input() index: number
   @Input() count: number | null
 
+
   columnClass(index: number): string {
     return `Column__title-ball--${index}`;
   }
+
+
 }

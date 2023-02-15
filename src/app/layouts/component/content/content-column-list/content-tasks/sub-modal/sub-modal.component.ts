@@ -6,7 +6,7 @@ import {MatSelectionListChange} from "@angular/material/list";
 import {Store} from "@ngrx/store";
 import {KanbanActions} from "../../../../../../store/actions";
 import {Observable, tap} from "rxjs";
-import {BtnSelectors, KanbanSelectors} from "../../../../../../store/selectors";
+import {KanbanSelectors} from "../../../../../../store/selectors";
 import {MatSelectChange} from "@angular/material/select";
 import {EditTaskDialogComponent} from "./edit-task-dialog/edit-task-dialog.component";
 
@@ -40,7 +40,7 @@ export class SubModalComponent implements OnInit {
       .pipe(tap(() => {
         this.actualColumns = this.data.status
       }))
-    this.store.select(BtnSelectors.activeName).subscribe((el) => this.actualList = el)
+
     this.oldDate = this.data
     this.subAll = this.data.subtasks.length
     this.subTrue = this.data.subtasks.filter(el => el.isCompleted).length

@@ -32,3 +32,9 @@ export interface EditBoard {
   name: string
   columns: Array<{ column: string, id: number }>
 }
+
+export interface Btn {
+  name: string
+  class: string
+  id: number
+}

@@ -1,6 +1,5 @@
 import {createAction, props} from "@ngrx/store";
 import {Boards, Columns, EditBoard, Tasks} from "../../assets/data/model";
-import {Btn} from "./reducerBtn";
 
 
 interface IColumn {
@@ -31,13 +30,7 @@ export enum KanbanNames {
   GetUI = '[UI] getUI',
   ChangeDarkMode = '[UI] changeDarkMode',
 
-  //Btn actions
-  GetBtn = '[Btn] get',
-  AddBtn = '[Btn] add',
-  DeleteBtn = '[Btn] delete',
-  ActiveBtn = '[Btn] active',
-  GetActiveName = '[Btn] getActiveName',
-  ActiveNameBtn = '[Btn] getActiveName'
+
 }
 
 export namespace KanbanActions {
@@ -47,8 +40,6 @@ export namespace KanbanActions {
   export const getAll = createAction(KanbanNames.GetAll);
 
   export const addBoard = createAction(KanbanNames.AddBoard, props<{ board: Boards }>())
-
-  export const changeContentList = createAction(KanbanNames.ChangeContentList, props<{ name: string }>())
 
   export const moveTask = createAction(KanbanNames.MoveTask, props<{ task: Tasks }>());
 
@@ -76,13 +67,6 @@ export namespace KanbanActions {
 
 }
 
-export namespace BtnActions {
 
-
-  export const getAll = createAction(KanbanNames.GetBtn);
-
-  export const addBtn = createAction(KanbanNames.AddBtn, props<{ item: Btn }>())
-
-}
 
 

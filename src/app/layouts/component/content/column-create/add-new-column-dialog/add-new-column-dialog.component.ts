@@ -4,6 +4,7 @@ import {DialogRef} from "@angular/cdk/dialog";
 import {Store} from "@ngrx/store";
 import {KanbanSelectors} from "../../../../../store/selectors";
 import {KanbanActions} from "../../../../../store/actions";
+import {Observable} from "rxjs";
 
 interface Column {
   status: string;
@@ -20,6 +21,7 @@ interface Column {
 export class AddNewColumnDialogComponent implements OnInit {
   form: FormGroup;
   columnList: Column[]
+  titleName: Observable<string>;
 
   constructor(private dialog: DialogRef,
               private fb: FormBuilder,
@@ -29,7 +31,7 @@ export class AddNewColumnDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(KanbanSelectors.getAllStatusOfColumns).subscribe(data => this.columnList = data)
-
+    this.titleName = this.store.select(KanbanSelectors.titleName)
     this.form = this.fb.group({
       columns: this.fb.array(this.columnList.map(el => this.addColumnFormGroup(el)))
     })
@@ -51,17 +53,15 @@ export class AddNewColumnDialogComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       let x = this.form.value
-      console.log('x', x)
       this.store.dispatch(KanbanActions.addColumn({column: x.columns}))
     }
-
   }
 
   get column() {
     return (this.form.controls['columns'] as FormArray)
   }
 
-  disableColumn(value: any): boolean {
+  disableColumn(value: number): boolean {
     return this.columnList.length > value
   }
 

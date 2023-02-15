@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import {Btn} from "../../../../store/reducerBtn";
+import {Btn} from "../../../../../assets/data/model";
 
 @Component({
   selector: 'app-sidebar-action',

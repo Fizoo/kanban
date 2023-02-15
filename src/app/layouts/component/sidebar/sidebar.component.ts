@@ -2,10 +2,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {DarkModeService} from 'src/app/services/dark-mode.service';
 import {Observable} from "rxjs";
 import {HideAsideService} from "../../../services/hide-aside.service";
-import {Btn} from "../../../store/reducerBtn";
 import {Store} from '@ngrx/store';
 import {KanbanSelectors} from "../../../store/selectors";
 import {KanbanActions} from "../../../store/actions";
+import {Btn} from "../../../../assets/data/model";
 
 @Component({
   selector: 'app-sidebar',

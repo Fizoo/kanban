@@ -1,3 +1,5 @@
+@use "./../../scss/mixins";
+
 .main {
   height: 100vh;
   width: 100%;
@@ -8,6 +10,15 @@
   grid-template-columns:  18.75rem 1fr;
   grid-template-areas:  'h h'
                         's c';
+  @include mixins.mobile {
+
+    grid-template-columns: 1fr;
+    grid-template-areas:  'h h'
+                          'c c';
+    .sidebar {
+      display: none;
+    }
+  }
 
   &.hide {
     grid-template-columns: 1fr;
@@ -31,6 +42,7 @@
     background: var(--darkGray);
     border-left: 1px solid var(--darkGrayLine);
     border-bottom: 1px solid var(--darkGrayLine);
+
   }
 
   .sidebar {

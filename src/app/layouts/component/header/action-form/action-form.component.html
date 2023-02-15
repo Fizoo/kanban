@@ -1,7 +1,9 @@
 <div class="Launch__buttons">
-  <button type="button" class="Button"
+  <button mat-raised-button color="primary" class="btn"
           (click)="openDialog()"
-  > + Add New task
+  >
+    <mat-icon>add</mat-icon>
+    <span class="btn-text"> Add New task</span>
   </button>
   <div class="DropDown">
     <button mat-icon-button [matMenuTriggerFor]="menu">

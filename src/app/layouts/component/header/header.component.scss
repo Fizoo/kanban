@@ -1,4 +1,4 @@
-
+@use './../../../scss/mixins' as logo;
 
 :host {
   display: flex;
@@ -12,24 +12,30 @@
   color: var(--title);
 }
 
-  /* @include mobile {
-     padding: 0 var(--margin-large);
-     padding-left: 0;
-     padding-right: var(--margin-small);
-   }*/
-  .logo {
-    display: flex;
-    align-items: center;
-    min-width: 16.75rem;
-    border-right: 2px solid var(--darkGrayLine);
-    height: 100%;
+/* @include mobile {
+   padding: 0 var(--margin-large);
+   padding-left: 0;
+   padding-right: var(--margin-small);
+ }*/
+.logo {
+  display: flex;
+  align-items: center;
+  width: 16.75rem;
+  border-right: 2px solid var(--darkGrayLine);
+  height: 100%;
+
+  @include logo.mobile {
+    display: none;
   }
 
-  .Launch__title {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    width: 100%;
-    max-width: 16rem;
-  }
+
+}
+
+.Launch__title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  max-width: 16rem;
+}
 

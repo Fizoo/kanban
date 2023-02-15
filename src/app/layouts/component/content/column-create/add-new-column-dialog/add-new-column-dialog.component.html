@@ -4,7 +4,7 @@
   <div class="content" mat-dialog-content>
 
     <mat-form-field class="title">
-      <mat-label>Title</mat-label>
+      <mat-label>{{titleName | async}}</mat-label>
       <input matInput placeholder="Title" disabled="true">
     </mat-form-field>
 
@@ -41,6 +41,7 @@
       type="submit"
       color="primary"
       mat-raised-button
+      mat-dialog-close="true"
       [disabled]="this.form.invalid"
     >Save Change
     </button>

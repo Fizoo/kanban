@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, switchMap, tap} from 'rxjs';
-import {BtnActions, KanbanActions, KanbanNames} from "./store/actions";
-import {Btn} from "./store/reducerBtn";
+import {switchMap, tap} from 'rxjs';
+import {KanbanNames} from "./store/actions";
 import {ListNameService} from "./services/list-name.service";
 import {LOCAL_STORAGE_KEY, LocalStorageService} from "./services/local-storage.service";
 import {Store} from "@ngrx/store";
@@ -28,7 +27,6 @@ export class AppEffects {
   changeLocalStorage$ = createEffect(() => this.actions$.pipe(
       ofType(KanbanNames.AddBoard,
         KanbanNames.EditBoard,
-        KanbanNames.ChangeContentList,
         KanbanNames.MoveTask,
         KanbanNames.EditTask,
         KanbanNames.AddTask,
@@ -50,19 +48,19 @@ export class AppEffects {
   )
 
 
-  addBtn$ = createEffect(() => this.actions$.pipe(
-    ofType(KanbanNames.AddBoard),
-    map((el: any) => el.board.name),
-    map((name) => {
-        let item: Btn = {
-          name: name,
-          id: new Date().getTime(),
-          class: 'SideNav__tab'
+  /*  addBtn$ = createEffect(() => this.actions$.pipe(
+      ofType(KanbanNames.AddBoard),
+      map((el: any) => el.board.name),
+      map((name) => {
+          let item: Btn = {
+            name: name,
+            id: new Date().getTime(),
+            class: 'SideNav__tab'
+          }
+          return BtnActions.addBtn({item})
         }
-        return BtnActions.addBtn({item})
-      }
-    )
-  ))
+      )
+    ))*/
   /*    addBtn1$ = createEffect(() =>
         this.actions$.pipe(
           ofType(KanbanNames.AddBoard),
@@ -78,21 +76,23 @@ export class AppEffects {
       );*/
 
 
-  activeLinkBtn$ = createEffect(() => this.actions$.pipe(
+  /*
+    activeLinkBtn$ = createEffect(() => this.actions$.pipe(
+        ofType(KanbanNames.ActiveBtn),
+        map((el: any) => el.item.name.trim()),
+        tap(name => this.listName.changeListName(name)
+        )
+      ), {
+        dispatch: false
+      }
+    )
+  //TODO :write type for action
+    changeActiveName$ = createEffect(() => this.actions$.pipe(
       ofType(KanbanNames.ActiveBtn),
       map((el: any) => el.item.name.trim()),
-      tap(name => this.listName.changeListName(name)
-      )
-    ), {
-      dispatch: false
-    }
-  )
-//TODO :write type for action
-  changeActiveName$ = createEffect(() => this.actions$.pipe(
-    ofType(KanbanNames.ActiveBtn),
-    map((el: any) => el.item.name.trim()),
-    map((name) => KanbanActions.changeActiveListName({name}))
-  ))
+      map((name) => KanbanActions.changeActiveListName({name}))
+    ))
+  */
 
   /* changeActiveName1$ = createEffect(() =>
      this.actions$.pipe(
