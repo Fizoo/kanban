@@ -31,7 +31,7 @@ export class AddNewColumnDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(KanbanSelectors.getAllStatusOfColumns).subscribe(data => this.columnList = data)
-    this.titleName = this.store.select(KanbanSelectors.titleName)
+    this.titleName = this.store.select(KanbanSelectors.getTitleName)
     this.form = this.fb.group({
       columns: this.fb.array(this.columnList.map(el => this.addColumnFormGroup(el)))
     })

@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {DialogRef} from "@angular/cdk/dialog";
 import {KanbanSelectors} from "../../../../../store/selectors";
 import {KanbanActions} from "../../../../../store/actions";
-import {EditBoard} from "../../../../../../assets/data/model";
+import {Columns, EditBoard} from "../../../../../../assets/data/model";
+import {of, Subject, switchMap, takeUntil} from "rxjs";
 
 interface IColumn {
   status: string
@@ -16,26 +17,33 @@ interface IColumn {
   templateUrl: './edit-board-dialog.component.html',
   styleUrls: ['./edit-board-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 
-export class EditBoardDialogComponent implements OnInit {
+export class EditBoardDialogComponent implements OnInit, OnDestroy {
+
   form: FormGroup;
-  columnList: IColumn[]
-  nameBoard: string
+  columnList: IColumn[] = []
+  nameBoard: string = ''
+  count: number = 0
+  private unsubscribe$ = new Subject<void>()
 
   constructor(private dialog: DialogRef,
               private fb: FormBuilder,
-              private store: Store
-  ) {
+              private store: Store) {
   }
 
   ngOnInit(): void {
-    this.store.select(KanbanSelectors.getAllStatusOfColumns).subscribe(data => this.columnList = data)
-    this.store.select(KanbanSelectors.titleName).subscribe(data => this.nameBoard = data)
+    this.store.select(KanbanSelectors.getAllStatusOfColumns)
+      .pipe(takeUntil(this.unsubscribe$)).subscribe(data => this.columnList = data)
+
+    this.store.select(KanbanSelectors.getTitleName)
+      .pipe(takeUntil(this.unsubscribe$)).subscribe(data => this.nameBoard = data)
+
     this.form = this.fb.group({
       name: [this.nameBoard, Validators.required],
-      columns: this.fb.array(this.columnList.map(el => this.addColumnFormGroup(el)))
+      columns: this.fb.array(this.columnList.map(el => this.createColumnFormGroup(el)))
     })
 
   }
@@ -45,8 +53,7 @@ export class EditBoardDialogComponent implements OnInit {
   }
 
   addColumn() {
-
-    this.columns.push(this.addColumnFormGroup({
+    this.columns.push(this.createColumnFormGroup({
       status: '',
       id: new Date().getTime()
     }))
@@ -54,21 +61,32 @@ export class EditBoardDialogComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      let board: EditBoard = {
+      const board: EditBoard = {
         name: this.name.value,
         columns: this.columns.value
       }
       this.store.dispatch(KanbanActions.editBoard({board}))
     }
-
     this.dialog.close()
   }
 
-  disableColumn(value: number): boolean {
-    return this.columnList.length > value
+  disableColumn(i: number): boolean {
+    const status = this.columns.controls[i].value;
+    const item: Columns = {
+      name: status.name,
+      id: status.id,
+      tasks: []
+    };
+
+    this.store.select(KanbanSelectors.getCountOfStatus(item)).pipe(
+      switchMap(count => of(count)),
+      takeUntil(this.unsubscribe$)
+    ).subscribe(count => this.count = count);
+
+    return this.count > 0;
   }
 
-  addColumnFormGroup(el: IColumn): FormGroup {
+  createColumnFormGroup(el: IColumn): FormGroup {
     return this.fb.group({
       column: [el.status, Validators.required],
       id: [el.id]
@@ -81,5 +99,10 @@ export class EditBoardDialogComponent implements OnInit {
 
   get name() {
     return this.form.controls['name']
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next()
+    this.unsubscribe$.complete()
   }
 }

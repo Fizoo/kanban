@@ -1,8 +1,8 @@
-import {NgModule, isDevMode} from '@angular/core';
+import {isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatButtonModule} from "@angular/material/button";
@@ -42,12 +42,10 @@ import {
 import {StoreModule} from '@ngrx/store';
 import {metaReducers, reducers} from "./store";
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
-import {ActiveBtnDirective} from './directives/active-btn.directive';
 import {ModalComponent} from './layouts/component/sidebar/sidebar-create-new/modal/modal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
 import {EffectsModule} from '@ngrx/effects';
 import {AppEffects} from './app.effects';
 import {
@@ -68,7 +66,7 @@ import {
   EditBoardDialogComponent
 } from './layouts/component/header/action-form/edit-board-dialog/edit-board-dialog.component';
 import {CheckedDirective} from "./directives/checked.directive";
-import { HeadMobileComponent } from './layouts/component/header/head-mobile/head-mobile.component';
+import {HeadMobileComponent} from './layouts/component/header/head-mobile/head-mobile.component';
 
 
 @NgModule({
@@ -94,7 +92,6 @@ import { HeadMobileComponent } from './layouts/component/header/head-mobile/head
     ContentColumnListComponent,
     ContentTasksComponent,
     ModalWindowComponent,
-    ActiveBtnDirective,
     ModalComponent,
     SubModalComponent,
     CheckedDirective,

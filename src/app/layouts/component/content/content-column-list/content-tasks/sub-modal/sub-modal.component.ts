@@ -36,7 +36,7 @@ export class SubModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById)
+    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusNames)
       .pipe(tap(() => {
         this.actualColumns = this.data.status
       }))

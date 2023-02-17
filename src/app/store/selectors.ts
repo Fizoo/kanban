@@ -2,7 +2,6 @@ import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {IKanban} from "./reducerList";
 import {Columns} from "../../assets/data/model";
 
-
 export namespace KanbanSelectors {
 
   export const kanban = createFeatureSelector<IKanban>('kanban');
@@ -11,7 +10,7 @@ export namespace KanbanSelectors {
     kanban,
     (state) => state)
 
-  export const countOfStatus = (item: Columns) => createSelector(
+  export const getCountOfStatus = (item: Columns) => createSelector(
     kanban,
     state => {
       const {boards, activeListName} = state;
@@ -23,68 +22,36 @@ export namespace KanbanSelectors {
     }
   )
 
-  export const getActiveList = createSelector(
-    kanban,
-    state => ({
-      ...state
-      //return state.boards.map(el=>el.)
-    })
-  )
-
   export const getActualList = createSelector(
     kanban,
-    state => [...state.boards].filter(board => board.name === state.activeListName)[0].columns
-  )
+    state => state.boards.find(board => board.name === state.activeListName)?.columns ?? []
+  );
 
-
-  export const getColumnStatusById = createSelector(
-    kanban,
-    (state) => [...state.boards].filter(board => board.name === state.activeListName)
-      .map(column => column.columns.map(el => el.name))[0]
-  )
-
-  export const getStatusIdAfterChange = (status: string) => createSelector(
-    kanban,
-    (state) => [...state.boards].filter(board => board.name === state.activeListName)[0]
-      .columns.filter(column => column.name === status)[0].id
+  export const getColumnStatusNames = createSelector(
+    getActualList,
+    columns => columns.map(column => column.name)
   )
 
   export const getAllStatusOfColumns = createSelector(
-    kanban,
-    state => {
-      let newBoard = [...state.boards].find(board => board.name === state.activeListName);
-      if (!!newBoard) {
-        return newBoard.columns.map(el => ({status: el.name, id: el.id}))
-      }
-      return []
-    }
+    getActualList,
+    columns => columns.map(column => ({status: column.name, id: column.id}))
   )
 
   export const getBtnList = createSelector(
     kanban,
-    state => {
-      return [...state.boards].map((el) => {
-        if (state.activeListName === el.name) {
-          return ({
-            name: el.name,
-            id: el.id,
-            class: 'SideNav__tab SideNav__tab--active'
-          })
-        } else return ({
-          name: el.name,
-          id: el.id,
-          class: 'SideNav__tab'
-        })
-      })
-    }
-  )
+    state => state.boards.map(board => ({
+      name: board.name,
+      id: board.id,
+      class: state.activeListName === board.name ? 'SideNav__tab SideNav__tab--active' : 'SideNav__tab'
+    }))
+  );
 
   export const getBtnListCount = createSelector(
     kanban,
-    state => [...state.boards].length
+    state => state.boards.length
   )
 
-  export const titleName = createSelector(
+  export const getTitleName = createSelector(
     kanban,
     state => state.activeListName
   )

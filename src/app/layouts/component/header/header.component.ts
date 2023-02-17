@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDark$ = this.mode.darkMode$
-    this.title$ = this.store.select(KanbanSelectors.titleName)
+    this.title$ = this.store.select(KanbanSelectors.getTitleName)
   }
 
 }

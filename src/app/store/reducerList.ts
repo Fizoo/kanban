@@ -222,10 +222,14 @@ export const listReducer = createReducer(
       let newColumns = [...board.columns].filter(el => !newBoard.columns.map(a => a.id).includes(el.id))
       let changeColumns = [...board.columns].filter(el => newBoard.columns.map(a => a.id).includes(el.id))
 
-      let boardChanged = newBoard.columns.map(c => {
+
+      let filteredBoard = newBoard.columns.filter(c => changeColumns.some(el => el.id === c.id))
+
+      let boardChanged = filteredBoard.map(c => {
         let tempColumn = changeColumns.find(el => el.id === c.id)
         return tempColumn && tempColumn.column !== c.name ? {...c, name: tempColumn.column} : c;
       })
+
 
       let addBoard = newColumns.map(el => ({
         name: el.column,

@@ -36,7 +36,7 @@ export class EditTaskDialogComponent implements OnInit {
       subtasks: this.formBuilder.array([...this.data.subtasks.map((el) => this.addSkillFormGroup(el))]),
     })
 
-    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusById)
+    this.columnStatus$ = this.store.select(KanbanSelectors.getColumnStatusNames)
 
   }
 

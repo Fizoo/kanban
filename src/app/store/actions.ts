@@ -16,7 +16,6 @@ export enum KanbanNames {
   AddTask = '[Kanban] addTask',
   AddBoard = '[Kanban] addBoard',
   AddColumns = '[Kanban] addColumns',
-  ChangeContentList = '[Kanban] changeContentList',
   EditTask = '[Kanban] editTask',
   MoveTaskByStatus = '[Kanban] moveTaskByStatus',
   ChangeTaskSubtaskCheck = '[Kanban] changeTaskSubtaskCheck',
@@ -29,19 +28,13 @@ export enum KanbanNames {
   //UI actions
   GetUI = '[UI] getUI',
   ChangeDarkMode = '[UI] changeDarkMode',
-
-
 }
 
 export namespace KanbanActions {
 
   export const initial = createAction(KanbanNames.InitialState)
 
-  export const getAll = createAction(KanbanNames.GetAll);
-
   export const addBoard = createAction(KanbanNames.AddBoard, props<{ board: Boards }>())
-
-  export const moveTask = createAction(KanbanNames.MoveTask, props<{ task: Tasks }>());
 
   export const editTask = createAction(KanbanNames.EditTask, props<{ task: Tasks }>());
 

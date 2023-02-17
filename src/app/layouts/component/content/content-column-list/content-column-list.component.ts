@@ -27,7 +27,7 @@ export class ContentColumnListComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEmptyColumn = this.item.tasks.length === 0;
-    this.count = this.store.select(KanbanSelectors.countOfStatus(this.item))
+    this.count = this.store.select(KanbanSelectors.getCountOfStatus(this.item))
   }
 
   isEmptyColumnFn(item: Columns): boolean {
