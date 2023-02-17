@@ -1,12 +1,20 @@
 <img *ngIf="isMobile" alt="" src="assets/image/logo-mobile.svg">
 <h1 class="Launch__title" title="Platform Launch">{{title}}</h1>
 
-<ng-container *ngIf="isMobile">
+<ng-container *ngIf="isMobile ">
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
 </ng-container>
+<ng-template>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+</ng-template>
+
 
 <mat-menu #menu="matMenu">
-
+  <app-head-mobile></app-head-mobile>
 </mat-menu>
+
+

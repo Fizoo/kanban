@@ -1,1 +1,12 @@
-<p>head-mobile works!</p>
+<div class="main">
+  <app-sidebar-head [count]="count$ |async"></app-sidebar-head>
+
+  <div mat-dialog-content>
+    <app-sidebar-action [listMenu]="list$ |async" (changeList)="changeList($event)"></app-sidebar-action>
+    <app-sidebar-create-new></app-sidebar-create-new>
+  </div>
+
+  <div mat-dialog-actions class="actions">
+    <app-sidebar-dark-mode [mode]="mode$ | async" (modeFn)="toggleMode()"></app-sidebar-dark-mode>
+  </div>
+</div>

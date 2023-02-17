@@ -1,4 +1,6 @@
 import {ChangeDetectionStrategy, Component, HostListener, Input} from '@angular/core';
+import {MatDialog} from "@angular/material/dialog";
+import {HideAsideService} from "../../../../services/hide-aside.service";
 
 @Component({
   selector: 'app-head',
@@ -16,4 +18,10 @@ export class HeadComponent {
   onResize(event: any) {
     this.isMobile = event.target.innerWidth <= 750;
   }
+
+  constructor(private dialog: MatDialog,
+              private hideService: HideAsideService) {
+  }
+
+
 }
