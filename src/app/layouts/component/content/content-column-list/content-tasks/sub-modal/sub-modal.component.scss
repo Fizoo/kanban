@@ -60,6 +60,13 @@
   .actions {
     display: flex;
     justify-content: space-between;
+
+    .btnForm {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0;
+      margin-left: 0;
+    }
   }
 }
 
