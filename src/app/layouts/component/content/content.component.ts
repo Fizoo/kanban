@@ -16,7 +16,6 @@ export class ContentComponent implements OnInit {
   @Input()
   activeName: string
 
-
   list$: Observable<Columns[]>
 
   constructor(private store: Store) {

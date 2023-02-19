@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, HostListener, Input} from '@angular/core';
-import {MatDialog} from "@angular/material/dialog";
-import {HideAsideService} from "../../../../services/hide-aside.service";
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {MobileResponsiveService} from "../../../../services/mobile-responsive.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-head',
@@ -12,15 +12,11 @@ export class HeadComponent {
   @Input()
   title: string | null
 
-  isMobile: boolean = false
+  isMobile: Observable<boolean>
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.isMobile = event.target.innerWidth <= 750;
-  }
 
-  constructor(private dialog: MatDialog,
-              private hideService: HideAsideService) {
+  constructor(private mobile: MobileResponsiveService) {
+    this.isMobile = this.mobile.screenSize$
   }
 
 

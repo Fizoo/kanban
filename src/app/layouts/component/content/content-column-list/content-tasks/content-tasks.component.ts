@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Subtask, Tasks} from "../../../../../../assets/data/model";
+import {Tasks} from "../../../../../../assets/data/model";
 import {MatDialog} from "@angular/material/dialog";
 import {SubModalComponent} from "./sub-modal/sub-modal.component";
 
@@ -15,10 +15,6 @@ export class ContentTasksComponent {
 
   constructor(public dialog: MatDialog) {
   }
-
-  subList: Subtask[]
-  checkedSubCount: number
-  subLength: number
 
   clickDiv(el: Tasks) {
     this.dialog.open(SubModalComponent, {

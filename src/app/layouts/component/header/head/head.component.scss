@@ -3,6 +3,10 @@
   gap: 1rem;
 }
 
+img {
+  padding: 1rem;
+}
+
 .Launch__title {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -11,9 +15,4 @@
   max-width: 16rem;
   padding: 0;
   margin: auto;
-}
-
-.mat-mdc-menu-content {
-
-  background: red;
 }

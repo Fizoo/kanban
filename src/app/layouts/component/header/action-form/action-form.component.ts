@@ -1,8 +1,6 @@
-import {ChangeDetectionStrategy, Component, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
 import {AddTaskDialogComponent} from "./add-task-dialog/add-task-dialog.component";
-import {Store} from "@ngrx/store";
-import {KanbanActions} from "../../../../store/actions";
 import {EditBoardDialogComponent} from "./edit-board-dialog/edit-board-dialog.component";
 
 @Component({
@@ -14,9 +12,10 @@ import {EditBoardDialogComponent} from "./edit-board-dialog/edit-board-dialog.co
 })
 export class ActionFormComponent {
 
-  constructor(public dialog: MatDialog,
-              private store: Store,
-  ) {
+  @Output()
+  delete = new EventEmitter<void>();
+
+  constructor(public dialog: MatDialog) {
   }
 
   openDialog() {
@@ -24,7 +23,7 @@ export class ActionFormComponent {
   }
 
   deleteBoard() {
-    this.store.dispatch(KanbanActions.deleteBoard())
+    this.delete.emit()
   }
 
   editDialog() {

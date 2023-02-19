@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from '@ngrx/store';
 import {Tasks} from "../../../../../../assets/data/model";
@@ -17,6 +17,7 @@ interface Status {
   templateUrl: './add-task-dialog.component.html',
   styleUrls: ['./add-task-dialog.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddTaskDialogComponent implements OnInit {
   form: FormGroup
@@ -50,7 +51,7 @@ export class AddTaskDialogComponent implements OnInit {
     }))
   }
 
-  submit(event: any) {
+  submit() {
 
     let newTask: Tasks = {
       ...this.form.value,

@@ -1,8 +1,15 @@
+@use './../../../../../scss/mixins' as modal;
+
 .form {
   background: var(--darkGray);
   color: var(--color-text);
   padding: 1rem;
   width: 500px;
+  @include modal.mobile {
+    width: 300px;
+    overflow-y: auto;
+  }
+
 
   h1 {
     color: var(--color-text);

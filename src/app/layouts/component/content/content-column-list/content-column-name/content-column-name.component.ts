@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-content-column-name',
   templateUrl: './content-column-name.component.html',
-  styleUrls: ['./content-column-name.component.scss']
+  styleUrls: ['./content-column-name.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContentColumnNameComponent {
   @Input() name: string

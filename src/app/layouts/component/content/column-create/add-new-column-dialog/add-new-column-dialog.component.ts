@@ -1,10 +1,10 @@
-import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {DialogRef} from "@angular/cdk/dialog";
 import {Store} from "@ngrx/store";
 import {KanbanSelectors} from "../../../../../store/selectors";
 import {KanbanActions} from "../../../../../store/actions";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 
 interface Column {
   status: string;
@@ -18,10 +18,11 @@ interface Column {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddNewColumnDialogComponent implements OnInit {
+export class AddNewColumnDialogComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  columnList: Column[]
+  columnList: Column[] = []
   titleName: Observable<string>;
+  private unSubscribe$ = new Subject<void>()
 
   constructor(private dialog: DialogRef,
               private fb: FormBuilder,
@@ -30,7 +31,9 @@ export class AddNewColumnDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(KanbanSelectors.getAllStatusOfColumns).subscribe(data => this.columnList = data)
+    this.store.select(KanbanSelectors.getAllStatusOfColumns)
+      .pipe(takeUntil(this.unSubscribe$))
+      .subscribe(data => this.columnList = data)
     this.titleName = this.store.select(KanbanSelectors.getTitleName)
     this.form = this.fb.group({
       columns: this.fb.array(this.columnList.map(el => this.addColumnFormGroup(el)))
@@ -43,7 +46,6 @@ export class AddNewColumnDialogComponent implements OnInit {
   }
 
   addColumn() {
-
     this.column.push(this.addColumnFormGroup({
       status: '',
       id: new Date().getTime()
@@ -70,5 +72,11 @@ export class AddNewColumnDialogComponent implements OnInit {
       column: [el.status, Validators.required],
       id: [el.id]
     });
+  }
+
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next()
+    this.unSubscribe$.complete()
   }
 }

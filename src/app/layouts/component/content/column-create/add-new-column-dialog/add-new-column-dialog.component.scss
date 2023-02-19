@@ -1,3 +1,4 @@
+@use './../../../../../scss/mixins' as dialog;
 
 .form {
   display: flex;
@@ -6,6 +7,10 @@
   background: var(--darkGray);
   color: var(--color-text);
   padding: 1.5rem;
+  @include dialog.mobile {
+    width: 300px;
+    overflow-y: auto;
+  }
 
   .h1 {
     color: var(--color-text);

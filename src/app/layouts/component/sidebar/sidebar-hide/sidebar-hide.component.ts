@@ -7,9 +7,11 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Output} from '@angular
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarHideComponent {
-  @Output() show = new EventEmitter();
 
-  changeVisible(){
+  @Output()
+  show = new EventEmitter();
+
+  changeVisible() {
     this.show.emit()
   }
 

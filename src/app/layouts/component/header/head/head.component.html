@@ -1,7 +1,7 @@
-<img *ngIf="isMobile" alt="" src="assets/image/logo-mobile.svg">
+<img *ngIf="isMobile | async" alt="" src="assets/image/logo-mobile.svg">
 <h1 class="Launch__title" title="Platform Launch">{{title}}</h1>
 
-<ng-container *ngIf="isMobile ">
+<ng-container *ngIf="isMobile |async">
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>

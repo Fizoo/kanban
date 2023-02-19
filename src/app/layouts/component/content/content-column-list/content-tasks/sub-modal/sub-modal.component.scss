@@ -1,3 +1,5 @@
+@use './../../../../../../scss/mixins' as d;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -5,6 +7,10 @@
   color: var(--color-text);
   padding: 1.5rem;
   width: 500px;
+  @include d.mobile {
+    max-width: 300px;
+    overflow-y: auto;
+  }
 
   .title {
     display: flex;

@@ -21,7 +21,6 @@ import {EditTaskDialogComponent} from "./edit-task-dialog/edit-task-dialog.compo
 export class SubModalComponent implements OnInit {
 
   columnStatus$: Observable<string[]>
-  actualList: string
   actualColumns: string = ''
   oldDate: Tasks
   subAll: number
@@ -50,9 +49,6 @@ export class SubModalComponent implements OnInit {
     this.dialogRef.close()
   }
 
-  select(item: Tasks) {
-    //console.log(item)
-  }
 
   onChange(change: MatSelectionListChange) {
     this.data = {

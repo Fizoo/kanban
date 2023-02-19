@@ -28,7 +28,6 @@ export class AppEffects {
         KanbanNames.ChangeTaskSubtaskCheck,
         KanbanNames.ChangeActiveListName
       ),
-
       tap(el => console.log('effect', el.type)),
       switchMap(() => this.store.select(KanbanSelectors.allState).pipe(
         debounceTime(500)

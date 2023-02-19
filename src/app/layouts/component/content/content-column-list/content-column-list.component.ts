@@ -43,7 +43,6 @@ export class ContentColumnListComponent implements OnInit {
         currentIndex: event.currentIndex
       }))
 
-      //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       this.store.dispatch(KanbanActions.transferArrayItem({
         previousContainer: event.previousContainer.data[0].statusId,
@@ -51,13 +50,6 @@ export class ContentColumnListComponent implements OnInit {
         previousIndex: event.previousIndex,
         currentIndex: event.currentIndex
       }))
-      /*transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );*/
-
     }
   }
 }

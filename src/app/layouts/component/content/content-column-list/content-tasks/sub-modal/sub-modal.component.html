@@ -28,7 +28,6 @@
         *ngFor="let item of data.subtasks"
         [selected]="item.isCompleted"
         [value]="item"
-        (click)="select(data)"
         [appChecked]="item.isCompleted">
         <span class="item">{{item.title}}</span>
       </mat-list-option>

@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {DarkModeService} from "../../../services/dark-mode.service";
 import {Store} from '@ngrx/store';
 import {KanbanSelectors} from "../../../store/selectors";
+import {KanbanActions} from "../../../store/actions";
 
 @Component({
   selector: 'app-header',
@@ -25,4 +26,7 @@ export class HeaderComponent implements OnInit {
     this.title$ = this.store.select(KanbanSelectors.getTitleName)
   }
 
+  deleteBoard() {
+    this.store.dispatch(KanbanActions.deleteBoard())
+  }
 }

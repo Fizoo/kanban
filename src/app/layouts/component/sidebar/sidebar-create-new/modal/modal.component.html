@@ -6,7 +6,7 @@
     <mat-form-field class="form-field">
       <mat-label>Name</mat-label>
       <input formControlName="name" matInput type="text">
-      <button matSuffix mat-icon-button aria-label="Clear" (click)="resetName()">
+      <button matSuffix mat-icon-button aria-label="Clear" type="button" (click)="resetName()">
         <mat-icon>close</mat-icon>
       </button>
       <mat-error>Name is required</mat-error>
@@ -28,6 +28,7 @@
         class="btn-closed"
         matSuffix
         mat-icon-button
+        type="button"
         (click)="delete(i)">
         <mat-icon>close</mat-icon>
       </button>
@@ -36,6 +37,7 @@
     <div>
       <button class="addColumn"
               mat-raised-button
+              type="button"
               color="accent"
               (click)="addColumns()"
       >+ Add New Column
